@@ -204,8 +204,230 @@ int main()
 ====================================================================================================================
 Q.7 Create a stack of 5 names of employees and delete the last name and display it. 
 
+#include<stdio.h>
+#include<stdlib.h>
+#define SIZE 3
+
+typedef struct a_st
+{
+	int Atop;
+	char Aelements[SIZE];	
+}Aaa;
+typedef struct b_st
+{
+	int Btop;
+	int Belements[SIZE];	
+}Bbb;
+
+
+void Ainitialize(Aaa *sp)
+{
+	sp->Atop=-1;
+}
+void Binitialize(Bbb *sp)
+{
+	sp->Btop=-1;
+}
+
+void Apush(Aaa *sp,char item)
+{
+		if(A_is_full(sp))	
+			printf("\nStack overflow\n");
+		else
+			sp->Aelements[++sp->Atop]=item;
+}
+void Bpush(Bbb *sp,int item)
+{
+		if(B_is_full(sp))	
+			printf("\nStack overflow\n");
+		else
+			sp->Belements[++sp->Btop]=item;
+}
+
+int Apop(Aaa *sp)
+{
+	int x;
+	if(A_is_empty(sp))
+		printf("\nStack underflow");
+	else
+		x=sp->Aelements[sp->Atop--];
+	return x;	
+}
+int Bpop(Bbb *sp)
+{
+	int x;
+	if(B_is_empty(sp))
+		printf("\nStack underflow");
+	else
+		x=sp->Belements[sp->Btop--];
+	return x;	
+}
+
+int A_is_full(Aaa*sp)   
+{
+	if(sp->Atop == SIZE-1)      
+		return 1;
+	else
+		return 0;
+}
+int B_is_full(Bbb *sp)   
+{
+	if(sp->Btop == SIZE-1)      
+		return 1;
+	else
+		return 0;
+}
+
+int A_is_empty(Aaa *sp)   
+{
+	if(sp->Atop == -1)          
+		return 1;
+	else
+		return 0;	
+}
+int B_is_empty(Bbb *sp)   
+{
+	if(sp->Btop == -1)          
+		return 1;
+	else
+		return 0;	
+}
+void A_display(Aaa *sp)
+{
+	int i;
+	
+	for(i=sp->Atop;i!=-1;i--)
+	{
+		printf("%c ",sp->Aelements[i]);	
+	}	
+	printf("\n\n");
+}
+
+void B_display(Bbb *sp)
+{
+	int i;
+	
+	for(i=sp->Btop;i!=-1;i--)
+	{
+		printf("%d ",sp->Belements[i]);	
+	}	
+	printf("\n\n");
+}
+
 ====================================================================================================================
 Q.8 Create two stacks A and B . A contains 3 alphabets and B contains 3 numbers. Display Both stacks.
+
+#include<stdio.h>
+#include<stdlib.h>
+#define SIZE 3
+
+typedef struct a_st
+{
+	int Atop;
+	char Aelements[SIZE];	
+}Aaa;
+typedef struct b_st
+{
+	int Btop;
+	int Belements[SIZE];	
+}Bbb;
+
+
+void Ainitialize(Aaa *sp)
+{
+	sp->Atop=-1;
+}
+void Binitialize(Bbb *sp)
+{
+	sp->Btop=-1;
+}
+
+void Apush(Aaa *sp,char item)
+{
+		if(A_is_full(sp))	
+			printf("\nStack overflow\n");
+		else
+			sp->Aelements[++sp->Atop]=item;
+}
+void Bpush(Bbb *sp,int item)
+{
+		if(B_is_full(sp))	
+			printf("\nStack overflow\n");
+		else
+			sp->Belements[++sp->Btop]=item;
+}
+
+int Apop(Aaa *sp)
+{
+	int x;
+	if(A_is_empty(sp))
+		printf("\nStack underflow");
+	else
+		x=sp->Aelements[sp->Atop--];
+	return x;	
+}
+int Bpop(Bbb *sp)
+{
+	int x;
+	if(B_is_empty(sp))
+		printf("\nStack underflow");
+	else
+		x=sp->Belements[sp->Btop--];
+	return x;	
+}
+
+int A_is_full(Aaa*sp)   
+{
+	if(sp->Atop == SIZE-1)      
+		return 1;
+	else
+		return 0;
+}
+int B_is_full(Bbb *sp)   
+{
+	if(sp->Btop == SIZE-1)      
+		return 1;
+	else
+		return 0;
+}
+
+int A_is_empty(Aaa *sp)   
+{
+	if(sp->Atop == -1)          
+		return 1;
+	else
+		return 0;	
+}
+int B_is_empty(Bbb *sp)   
+{
+	if(sp->Btop == -1)          
+		return 1;
+	else
+		return 0;	
+}
+void A_display(Aaa *sp)
+{
+	int i;
+	
+	for(i=sp->Atop;i!=-1;i--)
+	{
+		printf("%c ",sp->Aelements[i]);	
+	}	
+	printf("\n\n");
+}
+
+void B_display(Bbb *sp)
+{
+	int i;
+	
+	for(i=sp->Btop;i!=-1;i--)
+	{
+		printf("%d ",sp->Belements[i]);	
+	}	
+	printf("\n\n");
+}
+
+
 
 ====================================================================================================================
 Q.9 Create a queue which contains 5 double values and print all values.
