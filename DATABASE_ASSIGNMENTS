@@ -558,4 +558,161 @@ int main()
 ===========================================================================================================
 Q.11 Create a stack which contains ASCII values for alphabets and print Alphabets.
 
-=============================================================================================================
+#include<stdio.h>
+
+#include<stdio.h>
+#include<stdlib.h>
+#define SIZE 26
+typedef struct 
+{
+	int top;
+	int elements[SIZE];
+}stack;
+
+
+void initialize(stack *sp)
+{
+	sp->top=-1;
+}
+
+//FOR ADDING VALUES TO IT
+void push(stack *sp,int item)
+{
+	if(sp->top == SIZE-1)
+	printf("\nstack overflow\n");
+	else
+	sp->elements[++sp->top]=item;   
+	
+}
+
+//OVERWRITTING
+int pop(stack *sp)
+{
+	int x;             //BECAUSE WE WANT TO RETURN BACK THE VALUE  
+	if(sp->top == -1)
+	printf("\nstack underflow");
+	else
+    x=sp->elements[sp->top--];
+    return x;
+}
+
+void display(stack *sp)
+{
+     int i;
+     
+     for(i=sp->top;i!=-1;i--)
+    {
+        printf("%c\n",sp->elements[i]);
+	}
+}
+int main()
+{	
+	stack s1;
+	
+	initialize(&s1);
+	
+	int i;
+	for(i=65;i<=90;i++)
+	{
+		push(&s1,i);
+	}
+    display(&s1);
+}
+
+====================================================================================================================
+Q.12 Take 10 numbers from user, Make two stacks as Even & Odd, Even stack contains even numbers , Odd stack contains odd numbers.
+
+=======================================================================================================================
+Q.13 Make a program to copy elements of one stack to another.
+
+=======================================================================================================================
+Q.14 Read 5 numbers from user and store it in a stack.
+
+========================================================================================================================
+Q.15 Create a Link list of 5 nodes which stores information as a character.
+
+#include<stdio.h>
+#include<stdlib.h>
+
+typedef struct nd             
+{                           
+    char data;
+    struct nd *next;
+}node;
+
+typedef struct ls
+{
+	node *head,*tail;
+}list;
+
+node* createNode(char no)
+{
+    node *np;
+    
+    np=(node*)malloc(sizeof(node));  
+    
+    if(np == NULL)
+    {
+        printf("Memory not available");
+        exit(0);    
+    }
+    
+    np->data=no;
+    np->next=NULL;
+    
+    return np;
+}
+
+void initalize(list *p)
+{
+	p->head = NULL;
+	p->tail = NULL;
+}
+void insertAtail(list *p,char x)
+{
+	node *np;
+	np = createNode(x);
+	if(p->head==NULL)
+	p->head = np;
+	else
+	p->tail->next = np;
+	p->tail = np;
+}
+
+void traverse(list *p)
+{
+    node *sp;
+    sp = p->head;
+    
+    while(sp!=NULL)
+    {
+    	printf("%c",sp->data);
+    	sp=sp->next;
+	}
+}
+int main()
+{    
+    list *p;
+    
+    p = (list*) malloc(sizeof(list));
+    
+    if(p == NULL)
+    {
+    	printf("MEMORY UNVAVAILABLE");
+    	exit(0);
+	}
+	
+	initalize(p);
+	insertAtail(p,'A');
+	insertAtail(p,'B');
+	insertAtail(p,'C');
+	insertAtail(p,'D');
+	insertAtail(p,'E');
+	
+	traverse(p);
+	
+	free(p);
+    
+}
+
+=========================================================================================================================================
