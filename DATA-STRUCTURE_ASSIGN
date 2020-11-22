@@ -619,15 +619,78 @@ int main()
     display(&s1);
 }
 
-====================================================================================================================
+=================================================================================================================================
 Q.12 Take 10 numbers from user, Make two stacks as Even & Odd, Even stack contains even numbers , Odd stack contains odd numbers.
 
-=======================================================================================================================
+
+=================================================================================================================================
 Q.13 Make a program to copy elements of one stack to another.
 
-=======================================================================================================================
+
+=================================================================================================================================
 Q.14 Read 5 numbers from user and store it in a stack.
 
+#include<stdio.h>
+#include<stdlib.h>
+#define SIZE 5
+
+typedef struct sk
+{
+	int top;
+	int elements[SIZE];
+}stack;
+
+void initialize(stack *s1)
+{
+	s1->top = -1;
+}
+
+void push(stack *s1,int a)
+{
+	if(s1 == SIZE-1)
+	printf("\nSTACK OVERFLOW\n");
+	else
+	s1->elements[++s1->top]=a;
+}
+
+int pop(stack *s1)
+{
+	int x;
+	if(s1 == -1)
+	printf("\nSTACK UNDERFLOW\n");
+	else
+	x=s1->elements[s1->top--];
+return x;
+}
+
+display (stack *s1,int c)
+{
+	int x,y;
+	for(x=0;x<c;x++)
+	{
+	printf("ENTER YOUR NUMBERS %d : ",x+1);
+	scanf("%d",&y);
+	push(s1,y);
+    }
+    
+	for(x=0;x<c;x++)
+	{
+	printf("YOUR NO. ARE : %d\n",s1->elements[x]);
+    }
+}
+
+int main()
+{
+	stack *s1;
+	
+	s1=(stack*)malloc(sizeof(stack));
+	
+	initialize(s1);
+	
+	int x=5;
+	
+	display(s1,x);
+}
 ========================================================================================================================
 Q.15 Create a Link list of 5 nodes which stores information as a character.
 
