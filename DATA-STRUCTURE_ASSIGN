@@ -1385,7 +1385,37 @@ void main()
 =================================================================================================================================
 Q.22 Create an array of string and search a string in the array using Linear Search.
 
+#include<stdio.h>
 
+void main()
+{
+    char a[8]={"ABHISHEK"};
+	
+	int i,flag;
+	char x;
+	
+	printf("ENTER NO. TO BE MATCHED : ");
+	scanf("%c",&x);
+	
+	for(i=0;i<8;i++)
+	{
+		if(a[i] == x)
+		{
+			flag = i+1;
+			break;
+		}
+		else
+		flag = 0;
+    }
+    if(flag != 0)
+    {
+    	printf("\nCHAR %c\nMATCHES THE ARRAY MEMS %d\n",x,flag);
+	}
+	else
+	{
+	printf("\nCHAR DOESNT MATCH THE ARRAY MEMS\n");
+    }
+}
 ==================================================================================================================================
 Q.23 Sort an array of 5 numbers using Insertion sort
 
