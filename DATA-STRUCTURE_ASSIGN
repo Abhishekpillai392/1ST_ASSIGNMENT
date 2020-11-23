@@ -1352,34 +1352,7 @@ int main()
 =================================================================================================================================
 Q.21 Create an array of 5 integer values and search an element in the array using Linear Search.
 
-#include<stdio.h>
 
-void main()
-{
-	int a[5]={10,12,53,65,67};
-	
-	int i,x,c;
-	
-	printf("ENTER NO. TO BE MATCHED : ");
-	scanf("%d",&x);
-	
-	for(i=0;i<5;i++)
-	{
-		if(a[i] == x)
-		{
-			flag = i+1;
-			break;
-		}
-    }
-    if(flag != 0)
-    {
-    	printf("\nNO. MATCHES THE ARRAY %d\n",flag);
-	}
-	else
-	{
-	printf("\nNO. DOESNT MATCH THE ARRAY\n");
-    }
-}
 =================================================================================================================================
 Q.22 Create an array of string and search a string in the array using Linear Search.
 
