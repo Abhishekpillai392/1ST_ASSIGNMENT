@@ -766,7 +766,115 @@ int main()
 =================================================================================================================================
 Q.13 Make a program to copy elements of one stack to another.
 
+     #include<stdio.h>
+     #include<stdlib.h>
+     #include<string.h>
+     #define SIZE 5
 
+typedef struct a_st
+{
+	int Atop;
+	char Aelements[SIZE];	
+}Astack;
+typedef struct b_st
+{
+	int Btop;
+	int Belements[SIZE];	
+}Bstack;
+
+
+void Ainitialize(Astack *sp)
+{
+	sp->Atop=-1;
+}
+void Binitialize(Bstack *sp)
+{
+	sp->Btop=-1;
+}
+
+void Apush(Astack *sp,int item)
+{
+		if(A_is_full(sp))	
+			printf("\nStack overflow\n");
+		else
+			sp->Aelements[++sp->Atop]=item;
+}
+void Bpush(Bstack *sp,int item)
+{
+		if(B_is_full(sp))	
+			printf("\nStack overflow\n");
+		else
+			sp->Belements[++sp->Btop]=item;
+}
+
+int A_is_full(Astack*sp)   
+{
+	if(sp->Atop == SIZE-1)      
+		return 1;
+	else
+		return 0;
+}
+int B_is_full(Bstack*sp)   
+{
+	if(sp->Btop == SIZE-1)      
+		return 1;
+	else
+		return 0;
+}
+
+
+int A_is_empty(Astack *sp)   
+{
+	if(sp->Atop == -1)          
+		return 1;
+	else
+		return 0;	
+}
+int B_is_empty(Bstack *sp)   
+{
+	if(sp->Btop == -1)          
+		return 1;
+	else
+		return 0;	
+}
+
+Adisplay(Astack *sp)
+{
+	int i;
+	for(i=sp->Atop;i!=-1;i--)
+	{
+		printf("%d\n",sp->Aelements[i]);
+	}
+}
+
+Bdisplay(Bstack *sp)
+{
+	int x;
+	for(x=sp->Btop;x!=-1;x--)
+	{
+		printf("%d\n",sp->Belements[x]);
+	}
+	printf("\n");
+}
+
+int main()
+{
+	Astack a;
+	Bstack b;
+	
+	Ainitialize(&a);
+	Binitialize(&b);
+	
+	int i;
+	for(i=0;i<SIZE;i++)
+	{
+		Apush(&a,i);
+		Bpush(&b,i);
+	}
+	Adisplay(&a);
+	printf("\n");
+	Bdisplay(&b);	
+}
 =================================================================================================================================
 Q.14 Read 5 numbers from user and store it in a stack.
 
