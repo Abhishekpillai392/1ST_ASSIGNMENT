@@ -206,112 +206,65 @@ Q.7 Create a stack of 5 names of employees and delete the last name and display 
 
 #include<stdio.h>
 #include<stdlib.h>
-#define SIZE 3
+#define SIZE 10
+typedef struct st
+{
+	int top;
+	char elements[10][10];
+}stack;
 
-typedef struct a_st
+void initialize(stack *sp)
 {
-	int Atop;
-	char Aelements[SIZE];	
-}Aaa;
-typedef struct b_st
-{
-	int Btop;
-	int Belements[SIZE];	
-}Bbb;
-
-
-void Ainitialize(Aaa *sp)
-{
-	sp->Atop=-1;
-}
-void Binitialize(Bbb *sp)
-{
-	sp->Btop=-1;
+	sp->top=-1;
 }
 
-void Apush(Aaa *sp,char item)
+//FOR ADDING VALUES TO IT
+void push(stack *sp,char* item)
 {
-		if(A_is_full(sp))	
-			printf("\nStack overflow\n");
-		else
-			sp->Aelements[++sp->Atop]=item;
-}
-void Bpush(Bbb *sp,int item)
-{
-		if(B_is_full(sp))	
-			printf("\nStack overflow\n");
-		else
-			sp->Belements[++sp->Btop]=item;
-}
-
-int Apop(Aaa *sp)
-{
-	int x;
-	if(A_is_empty(sp))
-		printf("\nStack underflow");
+	if(sp->top == SIZE-1)
+	printf("\nstack overflow\n");
 	else
-		x=sp->Aelements[sp->Atop--];
-	return x;	
-}
-int Bpop(Bbb *sp)
-{
-	int x;
-	if(B_is_empty(sp))
-		printf("\nStack underflow");
-	else
-		x=sp->Belements[sp->Btop--];
-	return x;	
+	strcpy(sp->elements[++sp->top],item);   
+	
 }
 
-int A_is_full(Aaa*sp)   
+//OVERWRITTING
+int pop(stack *sp)
 {
-	if(sp->Atop == SIZE-1)      
-		return 1;
+	int x;             //BECAUSE WE WANT TO RETURN BACK THE VALUE  
+	if(sp->top == -1)
+	printf("\nstack underflow");
 	else
-		return 0;
-}
-int B_is_full(Bbb *sp)   
-{
-	if(sp->Btop == SIZE-1)      
-		return 1;
-	else
-		return 0;
+    x=sp->elements[sp->top--];
+    return x;
 }
 
-int A_is_empty(Aaa *sp)   
-{
-	if(sp->Atop == -1)          
-		return 1;
-	else
-		return 0;	
-}
-int B_is_empty(Bbb *sp)   
-{
-	if(sp->Btop == -1)          
-		return 1;
-	else
-		return 0;	
-}
-void A_display(Aaa *sp)
+void display(stack *sp)
 {
 	int i;
 	
-	for(i=sp->Atop;i!=-1;i--)
-	{
-		printf("%c ",sp->Aelements[i]);	
-	}	
-	printf("\n\n");
+	for(i=sp->top;i!=-1;i--)
+    {
+    	printf("%s\n",*(sp->elements+i));
+	}
 }
-
-void B_display(Bbb *sp)
+int main()
 {
-	int i;
+	stack e1;
 	
-	for(i=sp->Btop;i!=-1;i--)
-	{
-		printf("%d ",sp->Belements[i]);	
-	}	
+	initialize(&e1);
+	push(&e1,"ABHISHEK");
+	push(&e1,"HEMANT");
+	push(&e1,"SALONI");
+	push(&e1,"NIMESH");
+	push(&e1,"VISHAL");
+	
+	display(&e1);
+	
 	printf("\n\n");
+	pop(&e1);
+	
+	display(&e1);
 }
 
 ====================================================================================================================
