@@ -1342,7 +1342,7 @@ Q.22 Create an array of string and search a string in the array using Linear Sea
 
 void main()
 {
-    char a[8]={"ABHISHEK"};
+    char a[8]="ABHISHEK";
 	
 	int i,flag;
 	char x;
