@@ -1545,35 +1545,30 @@ void main()
 Q.22 Create an array of string and search a string in the array using Linear Search.
 
 #include<stdio.h>
+#include<string.h>
 
 void main()
 {
-    char a[8]="ABHISHEK";
+    char a[3][8]={"ABHISHEK","SALONI","NIMESH"};
 	
 	int i,flag;
-	char x;
+	char x[8];
 	
 	printf("ENTER NO. TO BE MATCHED : ");
-	scanf("%c",&x);
+	scanf("%s",&x);
 	
-	for(i=0;i<8;i++)
+	for(i=0;i<3;i++)
 	{
-		if(a[i] == x)
+		if(strcmp(a[i],x) == 0)
 		{
-			flag = i+1;
+			flag = 1;
 			break;
 		}
-		else
-		flag = 0;
     }
     if(flag != 0)
-    {
-    	printf("\nCHAR %c\nMATCHES THE ARRAY MEMS %d\n",x,flag);
-	}
+    	printf("\nCHAR %s\nMATCHES THE ARRAY MEMS %d\n",x,flag);
 	else
-	{
 	printf("\nCHAR DOESNT MATCH THE ARRAY MEMS\n");
-    }
 }
 ==================================================================================================================================
 Q.23 Sort an array of 5 numbers using Insertion sort
