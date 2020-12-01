@@ -1,1 +1,25 @@
+Q.1 Create a table Result which stores the records of 5 students where the fields as 
+    rollno, name, percentage.
+    
+create table demo(rollno number(2),name char(10),percent number(3));
+
+insert into demo(rollno,name,percent) VALUES(10,'AVINASH',67);
+insert into demo(rollno,name,percent) VALUES(11,'KAILASH',71);
+insert into demo(rollno,name,percent) VALUES(12,'BHUSHAN',56);
+insert into demo(rollno,name,percent) VALUES(13,'LOKESH',92);
+insert into demo(rollno,name,percent) VALUES(15,'DHANUSH',79);
+
+select * from demo;
+
+===========================================================================================================
+Q.2 Add a column in the Result table named as Grade.
+
+alter table demo add grade varchar2(3); 
+
+=============================================================================================================
+Q.3 Create a table marks which stores the marks of 5 subjects(physics,chemistry,maths,computer,english) and display the percentage. Store record of 5 students.
+
+
+=============================================================================================================================
+Q.4 Rename the table Result with StudentScore.
 
