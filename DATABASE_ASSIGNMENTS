@@ -36,4 +36,81 @@ alter table perc rename to Student_score;
 
 select * from Student_score;
 =============================================================================================================================
+Q.5 Create two tables A and B where A has 3 columns and B has 2 columns , Copy last two columns from table A to Table B.
 
+create table column1(cid number(4),cname varchar2(15),city varchar2(10));
+create table column2(cname varchar2(15),city varchar2(10));
+
+insert into column1 values(101,'AVINASH','PUNE');
+insert into column1 values(102,'DINESH','PATNA');
+insert into column1 values(103,'JEEVAN','SOLAPUR');
+insert into column1 values(104,'KAILASH','NAGPUR');
+
+insert into column2(cname,city) select cname,city from column1;
+
+select * from column2;
+
+=============================================================================================================================
+
+Q.6 Create a table which stores the information about a product . Fields are pid,pname,pqty,pcost. 
+     a) Display records in ascending order of quantity.  
+     b) Display records in descending order of product cost.
+     c) Display record for the product where the cost is highest.
+     d) Display the pid and pname of those products where the pcost is same.
+     
+     create table product4(pid number(4),pname varchar2(15),pqty number(4),pcost number(5));
+
+insert into product4 values(11,'KEYBOARD',1,1000);
+insert into product4 values(12,'MOUSE',6,500);
+insert into product4 values(13,'JOYSTICK',2,1000);
+insert into product4 values(14,'MONITOR',3,4000);
+insert into product4 values(15,'CPU',3,9000);
+
+select * from product4;
+/*A]*/  
+select * from product4 ORDER BY pqty ASC;
+/*B]*/
+select * from product4 ORDER BY pcost DESC;
+/*C]*/
+select * from product4 where pcost > 8000;
+/*D]*/
+select * from product4 where pid = 13 or pcost = 1000;
+
+================================================================================================================================
+
+Q.7 Create a table where insert 5 records like name,dob and city of a customer using single insert query.
+
+create table cus(name varchar2(15),dob date,city varchar2(10));
+
+insert all
+into cus(name,dob,city) values('AVINASH',date '1998-09-03','PUNE')
+into cus(name,dob,city) values('ARVIND',date '1999-01-21','SATARA')
+into cus(name,dob,city) values('RUSHIKESH',date '1998-05-09','MUMBAI')
+
+select * from dual;
+
+select * from cus;
+============================================================================================================
+Q.8 Create a table which stores the salary of 3 employees along with the name and display the names salary wise (highest first).
+
+create table emp3(ename varchar2(15),salary number(5));
+
+insert all
+into emp3(ename,salary) values('LOKESH',25000)
+into emp3(ename,salary) values('RAHUL',32000)
+into emp3(ename,salary) values('AVINASH',28000)
+
+select *from dual;
+
+select * from emp3;
+
+select * from emp3 ORDER BY salary DESC;
+
+=================================================================================================================
+Q.9 Update the highest salary of the employee in above question to the minimum of all.
+
+update emp3 set salary = 20000 where salary > 30000;
+
+select * from emp3 ORDER BY salary DESC;
+
+=================================================================================================================
