@@ -116,7 +116,23 @@ select * from emp3 ORDER BY salary DESC;
 =================================================================================================================
 Q.10 create a table employee: eid, age, dept, salary. Show name of dept with lowest salary using group by.
 
+create table employee(pname varchar2(20),eid number(3),age number(3),dept varchar2(15),salary number(5));
 
+insert all
+into employee(pname,eid,age,dept,salary) values('MANISH',101,25,'CHEMICAL',20000)
+into employee(pname,eid,age,dept,salary) values('AADIL',102,27,'MEHCANICAL',17000)
+into employee(pname,eid,age,dept,salary) values('KAUHSIK',103,23,'SOFTWARE',32000)
+into employee(pname,eid,age,dept,salary) values('SELMON',104,28,'CIVIL',24000)
+into employee(pname,eid,age,dept,salary) values('VIVEK',102,27,'MEHCANICAL',25000)
+into employee(pname,eid,age,dept,salary) values('ARJIT',104,28,'CIVIL',21000)
+into employee(pname,eid,age,dept,salary) values('ASHWIN',101,25,'CHEMICAL',18000)
+into employee(pname,eid,age,dept,salary) values('ABHISH',102,27,'MEHCANICAL',20000)
+
+select * from dual;
+select * from employee;
+
+select dept,min(salary)AS TOTAL_INCOME from employee group by dept having min(salary)<18000;  
+  
 ==================================================================================================================
 Q.11 Write a query to perform following operations on the table :
       a) Create a table as Population :  State, popoulation
@@ -125,6 +141,9 @@ Q.11 Write a query to perform following operations on the table :
       d) find average population
       e) Display name of state population wise in descending order
       f) Display name of state population wise in ascending order
+
+
+=================================================================================================================
 Q.12 Create a table ItemSales : Itemname, Sales, city  
      Display the following output (Create a query which displays the Total sales citywise)
       Item           Sales
@@ -132,7 +151,11 @@ Q.12 Create a table ItemSales : Itemname, Sales, city
       RAM             4
       Hard Disk       3
       Mouse           1
+      
+====================================================================================================================================      
 Q.13 Make a table which stores the email id and password where password should not be saved if the length is less than 8 character.
+
+
 ============================================================================================================================================================
 Q.14 Make a table which stores the name and mobile no of customers. where mobile no can not saved in database if the mobile no is less than 10 digits.
 
