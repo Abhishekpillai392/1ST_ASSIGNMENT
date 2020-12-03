@@ -142,6 +142,23 @@ Q.11 Write a query to perform following operations on the table :
       e) Display name of state population wise in descending order
       f) Display name of state population wise in ascending order
 
+create table population(state varchar2(20), population varchar2(15));
+
+insert all
+into population(state,population) values('MAHARASHTRA',110000000)
+into population(state,population) values('RAJASTHAN',40000000)
+into population(state,population) values('KARNATAKA',80000000)
+into population(state,population) values('KERALA',30000000)
+
+select * from dual;
+
+select * from population;
+
+select state,min(population)AS TOTAL_pop from population group by state having min(population)<40000000;
+select state,max(population)AS TOTAL_pop from population group by state having max(population)>100000000;
+select avg(population)AS TOTAL_pop from population;
+select * from population ORDER BY state DESC;
+select * from population ORDER BY state ASC;
 
 =================================================================================================================
 Q.12 Create a table ItemSales : Itemname, Sales, city  
