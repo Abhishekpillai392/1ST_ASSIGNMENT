@@ -169,6 +169,25 @@ Q.12 Create a table ItemSales : Itemname, Sales, city
       Hard Disk       3
       Mouse           1
       
+      
+      create table Itemsales(Itemname varchar2(20),sales number(4),city varchar2(20));
+
+insert all
+into Itemsales(Itemname,sales,city) values('RAM',5,'PUNE')
+into Itemsales(Itemname,sales,city) values('HD',15,'AHMEDABAD')
+into Itemsales(Itemname,sales,city) values('MOUSE',30,'NAGPUR')
+into Itemsales(Itemname,sales,city) values('RAM',5,'AHMEDABAD')
+into Itemsales(Itemname,sales,city) values('HD',10,'NAGPUR')
+into Itemsales(Itemname,sales,city) values('RAM',55,'NAGPUR')
+into Itemsales(Itemname,sales,city) values('HD',40,'AURANGABAD')
+into Itemsales(Itemname,sales,city) values('RAM',10,'MUMBAI')
+
+select * from dual;
+
+select * from Itemsales;
+
+select city,count(sales) as SALES_FROM_CITIES from Itemsales group by city;
+
 ====================================================================================================================================      
 Q.13 Make a table which stores the email id and password where password should not be saved if the length is less than 8 character.
 
@@ -185,7 +204,36 @@ select * from cus3;
 ============================================================================================================================================================
 Q.15 Create a table person which stores the ID,name,email where define ID as primary key.Create another table Birthday which stores date of birth and ID.
      Join both tables and create Foreign key in Birthday.
-     
+
+create table person2(eid number(4),name varchar2(20),email varchar2(20), primary key(eid));
+create table birthday(dob date,id number(04) CONSTRAINT ck_id REFERENCES person2(eid));
+
+insert all
+into person2(eid,name,email) values(101,'ASHLEY','ashley121')
+into person2(eid,name,email) values(102,'LELE','leleponies238')
+into person2(eid,name,email) values(103,'ASHWADEEP','ashwadeep123')
+into person2(eid,name,email) values(104,'BRUCE','bruceleejnr2002')
+into person2(eid,name,email) values(105,'MARTIN','martinguy203')
+into person2(eid,name,email) values(106,'ASHWIN','ashwin2809')
+
+select * from dual;
+
+select * from person2;
+
+drop table person2;
+drop table birthday;
+
+insert all
+into birthday(dob,id) values(date '1998-05-30',101)
+into birthday(dob,id) values(date '1999-01-01',102)
+into birthday(dob,id) values(date '1998-09-01',103)
+into birthday(dob,id) values(date '1998-06-28',104)
+into birthday(dob,id) values(date '1999-03-10',105)
+into birthday(dob,id) values(date '1998-12-03',106)
+
+select * from dual;
+
+select e.name,a.dob,e.email from person2 e,birthday a where e.eid = a.id;
 ============================================================================================================================================================
 Q.16 Create a table where records of an employee is maintained . 
      Fields are EID (primary key), Ename (NOT NULL), officeno (Unique), DateOfJoining(NOT NULL),CompanyName(Default),Salary(Check is : salary > 0)
