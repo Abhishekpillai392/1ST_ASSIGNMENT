@@ -240,3 +240,53 @@ Q.16 Create a table where records of an employee is maintained .
      Create PersonnelDetails : ID( Foreign Key ) , Addres (NOT NULL), contactno(NOT NULL , UNIQUE) 
      Join Both tables and Display output
 
+create table rcemployee(eid number,ename varchar2(20) NOT NULL,officeno number(15),Dateofjoining date NOT NULL,companyname varchar2(20) default 'DIGIT',salary number(5) check(salary > 0),primary key(eid),unique(officeno));
+create table personaldetails(address varchar2(20) NOT NULL,contactno number(10) NOT NULL ,id number(4) CONSTRAINT co_id REFERENCES rcemployee(eid),CONSTRAINT ck_con unique(contactno)); 
+
+insert all
+into rcemployee(eid,ename,officeno,Dateofjoining,companyname,salary) values(101,'AVINASH',41010293,date '2020-10-01','GO_DIGIT',25000)
+into rcemployee(eid,ename,officeno,Dateofjoining,companyname,salary) values(201,'ABHINAV',32928924,date '2020-09-30','GO_DADDY',35000)
+into rcemployee(eid,ename,officeno,Dateofjoining,companyname,salary) values(301,'ASHLESHA',15060294,date '2020-07-16','TATA_MOTORS',55000)
+into rcemployee(eid,ename,officeno,Dateofjoining,companyname,salary) values(401,'AVANTI',61710235,date '2020-10-01','RUBY_LTD',20000)
+
+select * from dual;
+select * from rcemployee;
+
+insert all
+into personaldetails(address,contactno,id) values('MERIL_STREET',9888823456,101)
+into personaldetails(address,contactno,id) values('GB_ROAD',9842382752,201)
+into personaldetails(address,contactno,id) values('YERAWADA',9668823416,301)
+into personaldetails(address,contactno,id) values('TILAK_NAGAR',8188823345,401)
+
+select * from dual;
+select * from personaldetails;
+
+select x.eid,x.ename,x.officeno,x.Dateofjoining,x.companyname,x.salary,y.address,y.contactno from rcemployee x,personaldetails y where x.eid = y.id;
+
+drop table rcemployee;
+drop table personaldetails;
+
+============================================================================================================================================================================================================================================
+
+Q.17  Create a table Students ---- Rollno( Primary Key ), 
+                                   Name (NOT NULL)
+  
+      Create a table College ----- CollegeId ( Primary Key ),
+                                   EnrollId (Foreign Key ), 
+                                   College Name,
+                                   AdmissionDate,
+                                   ContactNo
+
+  a) Join these tables and show the output as
+                                            RollNo  , Name , College Name , Admission Date , Contact No 
+  b) Remove Primary Key constraint from college
+  c) Input the details of 5 students for a differnt college
+  d)  Group all the students based on collegeName
+  
+=====================================================================================================================================================================
+
+Q.18 Create a table which stores PersonName(Not Null),Mobile(Unique),Address.  Create two views v1 and v2 on the table. v1 is read only but v2 is updatable.
+      v1 shows personName and Mobile while v2 shows PersonName and Address.
+
+=========================================================================================================================================================================
+
