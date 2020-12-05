@@ -240,6 +240,32 @@ Q.16 Create a table where records of an employee is maintained .
      Create PersonnelDetails : ID( Foreign Key ) , Addres (NOT NULL), contactno(NOT NULL , UNIQUE) 
      Join Both tables and Display output
 
+create table rcemployee(eid number,ename varchar2(20) NOT NULL,officeno number(15),Dateofjoining date NOT NULL,companyname varchar2(20) default 'DIGIT',salary number(5) check(salary > 0),primary key(eid),unique(officeno));
+create table personaldetails(address varchar2(20) NOT NULL,contactno number(10) NOT NULL ,id number(4) CONSTRAINT co_id REFERENCES rcemployee(eid),CONSTRAINT ck_con unique(contactno)); 
+
+insert all
+into rcemployee(eid,ename,officeno,Dateofjoining,companyname,salary) values(101,'AVINASH',41010293,date '2020-10-01','GO_DIGIT',25000)
+into rcemployee(eid,ename,officeno,Dateofjoining,companyname,salary) values(201,'ABHINAV',32928924,date '2020-09-30','GO_DADDY',35000)
+into rcemployee(eid,ename,officeno,Dateofjoining,companyname,salary) values(301,'ASHLESHA',15060294,date '2020-07-16','TATA_MOTORS',55000)
+into rcemployee(eid,ename,officeno,Dateofjoining,companyname,salary) values(401,'AVANTI',61710235,date '2020-10-01','RUBY_LTD',20000)
+
+select * from dual;
+select * from rcemployee;
+
+insert all
+into personaldetails(address,contactno,id) values('MERIL_STREET',9888823456,101)
+into personaldetails(address,contactno,id) values('GB_ROAD',9842382752,201)
+into personaldetails(address,contactno,id) values('YERAWADA',9668823416,301)
+into personaldetails(address,contactno,id) values('TILAK_NAGAR',8188823345,401)
+
+select * from dual;
+select * from personaldetails;
+
+select x.eid,x.ename,x.officeno,x.Dateofjoining,x.companyname,x.salary,y.address,y.contactno from rcemployee x,personaldetails y where x.eid = y.id;
+
+drop table rcemployee;
+drop table personaldetails;
+commit;
 ============================================================================================================================================================================================================================================
 
 Q.17  Create a table Students ---- Rollno( Primary Key ), 
@@ -256,11 +282,74 @@ Q.17  Create a table Students ---- Rollno( Primary Key ),
   b) Remove Primary Key constraint from college
   c) Input the details of 5 students for a differnt college
   d)  Group all the students based on collegeName
-  
+
+create table students1(rollno number(3),cname varchar2(20) NOT NULL,enrollno varchar2(30),primary key(enrollno));
+create table college2(college_id varchar2(20),college_name char(30),admission_date date,contact_no number(10),enrollment_id varchar2(30) CONSTRAINT con_enr REFERENCES students1(enrollno),primary key(college_id));
+create table college3(college_id varchar2(20),college_name char(30),admission_date date,contact_no number(10),enrollment_id varchar2(30) CONSTRAINT cn_enr REFERENCES students1(enrollno),primary key(college_id));
+
+insert all
+into students1(rollno,cname,enrollno) values(01,'AVINASH','DUHEU344')
+into students1(rollno,cname,enrollno) values(12,'SALMAN','DUHEU352')
+into students1(rollno,cname,enrollno) values(06,'CHIRAG','DUHEU334')
+into students1(rollno,cname,enrollno) values(21,'HERMANT','DUHEU349')
+into students1(rollno,cname,enrollno) values(09,'QUINTON','DUHEU323')
+
+select *from dual;
+
+insert all
+into college2(college_id,college_name,admission_date,contact_no,enrollment_id) values(1101,'JAIHIND',date '09-06-20',9887675765,'DUHEU334')
+into college2(college_id,college_name,admission_date,contact_no,enrollment_id) values(1203,'MMCC',date '01-07-20',9187612744,'DUHEU352')
+into college2(college_id,college_name,admission_date,contact_no,enrollment_id) values(1443,'FC',date '21-06-20',9287675765,'DUHEU323')
+into college2(college_id,college_name,admission_date,contact_no,enrollment_id) values(1110,'MODERN','05-06-20',8187122765,'DUHEU349')
+into college2(college_id,college_name,admission_date,contact_no,enrollment_id) values(1121,'WADIA',date '28-06-20',6287645765,'DUHEU344')
+
+select * from dual;
+select * from college2; 
+
+select a.rollno,a.cname,a.enrollno,b.college_id,b.college_name,b.admission_date,b.contact_no,b.enrollment_id from students1 a,college2 b where a.enrollno = b.enrollment_id;
+
+alter table college2 drop primary key;
+
+insert all
+into college3(college_id,college_name,admission_date,contact_no,enrollment_id) values(1101,'JAIHIND',date '09-06-20',9287675765,'DUHEU323')
+into college3(college_id,college_name,admission_date,contact_no,enrollment_id) values(1203,'MMCC',date '01-07-20',9187612744,'DUHEU352')
+into college3(college_id,college_name,admission_date,contact_no,enrollment_id) values(1443,'FC',date '21-06-20',9887675765,'DUHEU334')
+into college3(college_id,college_name,admission_date,contact_no,enrollment_id) values(1110,'MODERN','05-06-20',6287645765,'DUHEU344')
+into college3(college_id,college_name,admission_date,contact_no,enrollment_id) values(1121,'WADIA',date '28-06-20',8187122765,'DUHEU349')
+
+select * from dual;
+select * from college3;
+
+select c.rollno,c.cname,c.enrollno,d.college_id,d.college_name,d.admission_date,d.contact_no,d.enrollment_id from students1 c,college3 d where c.enrollno = d.enrollment_id;
+
+select college_name,count(college_name) as TOTAL_STUDENTS from college3 group by college_name;
+
+drop table students1;                                                      
+drop table college2;
+commit;
 =====================================================================================================================================================================
 
 Q.18 Create a table which stores PersonName(Not Null),Mobile(Unique),Address.  Create two views v1 and v2 on the table. v1 is read only but v2 is updatable.
       v1 shows personName and Mobile while v2 shows PersonName and Address.
 
+
+create table person4(person_name varchar2(20) not null,mobile number(10) unique,address varchar2(20));
+
+insert all
+into person4(person_name,mobile,address) values('ABHISHEK',6789909002,'GH STREET')
+into person4(person_name,mobile,address) values('ABHINAV',9452987322,'GM ROAD')
+into person4(person_name,mobile,address) values('ADIPURUSH',2323232202,'SHIVAJINAGAR')
+into person4(person_name,mobile,address) values('ADITYA',8789213202,'YERWADA')
+into person4(person_name,mobile,address) values('AADI',7885469023,'SANGVI')
+
+select * from dual;
+
+select * from person4;
+
+create view v1_per as select * from person4 with read only;
+create view v2_per as select * from person4;
+
+select person_name,mobile from v1_per;
+select person_name,address from v2_per;
 =========================================================================================================================================================================
 
