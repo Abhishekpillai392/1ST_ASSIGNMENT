@@ -355,4 +355,21 @@ select person_name,address from v2_per;
 Commit;
 
 =========================================================================================================================================================================
+Q.19 Create a PL/SQL Block which declares the radius of a circle and make a constant pi and assign values as 3.14 to it. Find the area of circle and Print area.
+
+SET SERVEROUTPUT ON 
+
+DECLARE 
+AREA real;
+pi CONSTANT double precision := 3.14;
+RADIUS real(4) := 4;
+BEGIN
+AREA := pi * RADIUS * RADIUS;
+dbms_output.put_line('RADIUS : '|| RADIUS);
+dbms_output.put_line('AREA OF THE CIRCLE : '|| AREA);
+END;
+/
+
+======================================================================================================================================================================
+
 
