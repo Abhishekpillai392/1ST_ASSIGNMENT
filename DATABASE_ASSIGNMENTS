@@ -351,5 +351,8 @@ create view v2_per as select * from person4;
 
 select person_name,mobile from v1_per;
 select person_name,address from v2_per;
+
+Commit;
+
 =========================================================================================================================================================================
 
