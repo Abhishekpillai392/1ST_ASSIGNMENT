@@ -1,43 +1,3 @@
-Q.1 Create a table Result which stores the records of 5 students where the fields as 
-    rollno, name, percentage.
-    
-create table demo(rollno number(2),name char(10),percent number(3));
-
-insert into demo(rollno,name,percent) VALUES(10,'AVINASH',67);
-insert into demo(rollno,name,percent) VALUES(11,'KAILASH',71);
-insert into demo(rollno,name,percent) VALUES(12,'BHUSHAN',56);
-insert into demo(rollno,name,percent) VALUES(13,'LOKESH',92);
-insert into demo(rollno,name,percent) VALUES(15,'DHANUSH',79);
-
-select * from demo;
-
-===========================================================================================================
-Q.2 Add a column in the Result table named as Grade.
-
-alter table demo add grade varchar2(3); 
-
-=============================================================================================================
-Q.3 Create a table marks which stores the marks of 5 subjects(physics,chemistry,maths,computer,english) and display the percentage. Store record of 5 students.
-
-create table perc(NAME varchar2(10),PHYSICS number,CHEMISTRY number,MATHS number,COMPUTER number,ENGLISH number,PERCENTAGE as(((PHYSICS+CHEMISTRY+MATHS+COMPUTER+ENGLISH)*100)/500));
-
-insert into perc(NAME,PHYSICS,CHEMISTRY,MATHS,COMPUTER,ENGLISH) values('AJAY',45,56,67,78,89);
-insert into perc(NAME,PHYSICS,CHEMISTRY,MATHS,COMPUTER,ENGLISH) values('ABHI',46,51,77,88,89);
-insert into perc(NAME,PHYSICS,CHEMISTRY,MATHS,COMPUTER,ENGLISH) values('AVINASH',59,63,64,72,65);
-insert into perc(NAME,PHYSICS,CHEMISTRY,MATHS,COMPUTER,ENGLISH) values('ABHIJEET',35,37,47,38,56);
-insert into perc(NAME,PHYSICS,CHEMISTRY,MATHS,COMPUTER,ENGLISH) values('ABHINAV',75,66,77,88,89);
-
-select *from perc;
-
-=============================================================================================================================
-Q.4 Rename the table Result with StudentScore.
-
-alter table perc rename to Student_score;
-
-select * from Student_score;
-=============================================================================================================================
-Q.5 Create two tables A and B where A has 3 columns and B has 2 columns , Copy last two columns from table A to Table B.
-
 create table column1(cid number(4),cname varchar2(15),city varchar2(10));
 create table column2(cname varchar2(15),city varchar2(10));
 
@@ -50,15 +10,9 @@ insert into column2(cname,city) select cname,city from column1;
 
 select * from column2;
 
-=============================================================================================================================
+/*==============================================================================*/
 
-Q.6 Create a table which stores the information about a product . Fields are pid,pname,pqty,pcost. 
-     a) Display records in ascending order of quantity.  
-     b) Display records in descending order of product cost.
-     c) Display record for the product where the cost is highest.
-     d) Display the pid and pname of those products where the pcost is same.
-     
-     create table product4(pid number(4),pname varchar2(15),pqty number(4),pcost number(5));
+create table product4(pid number(4),pname varchar2(15),pqty number(4),pcost number(5));
 
 insert into product4 values(11,'KEYBOARD',1,1000);
 insert into product4 values(12,'MOUSE',6,500);
@@ -76,9 +30,7 @@ select * from product4 where pcost > 8000;
 /*D]*/
 select * from product4 where pid = 13 or pcost = 1000;
 
-================================================================================================================================
-
-Q.7 Create a table where insert 5 records like name,dob and city of a customer using single insert query.
+/*===================================================================*/
 
 create table cus(name varchar2(15),dob date,city varchar2(10));
 
@@ -90,8 +42,8 @@ into cus(name,dob,city) values('RUSHIKESH',date '1998-05-09','MUMBAI')
 select * from dual;
 
 select * from cus;
-============================================================================================================
-Q.8 Create a table which stores the salary of 3 employees along with the name and display the names salary wise (highest first).
+
+/*=====================================================================*/
 
 create table emp3(ename varchar2(15),salary number(5));
 
@@ -106,15 +58,14 @@ select * from emp3;
 
 select * from emp3 ORDER BY salary DESC;
 
-=================================================================================================================
-Q.9 Update the highest salary of the employee in above question to the minimum of all.
+/*====================================================*/
 
 update emp3 set salary = 20000 where salary > 30000;
 
 select * from emp3 ORDER BY salary DESC;
 
-=================================================================================================================
-Q.10 create a table employee: eid, age, dept, salary. Show name of dept with lowest salary using group by.
+/*====================================================*/
+/*10]*/
 
 create table employee(pname varchar2(20),eid number(3),age number(3),dept varchar2(15),salary number(5));
 
@@ -133,14 +84,9 @@ select * from employee;
 
 select dept,min(salary)AS TOTAL_INCOME from employee group by dept having min(salary)<18000;  
   
-==================================================================================================================
-Q.11 Write a query to perform following operations on the table :
-      a) Create a table as Population :  State, popoulation
-      b) Find minimum population
-      c) Find maximum population
-      d) find average population
-      e) Display name of state population wise in descending order
-      f) Display name of state population wise in ascending order
+drop table employee;
+/*================================================================================================*/
+/*11]*/
 
 create table population(state varchar2(20), population varchar2(15));
 
@@ -160,17 +106,10 @@ select avg(population)AS TOTAL_pop from population;
 select * from population ORDER BY state DESC;
 select * from population ORDER BY state ASC;
 
-=================================================================================================================
-Q.12 Create a table ItemSales : Itemname, Sales, city  
-     Display the following output (Create a query which displays the Total sales citywise)
-      Item           Sales
-      ----           -----
-      RAM             4
-      Hard Disk       3
-      Mouse           1
-      
-      
-      create table Itemsales(Itemname varchar2(20),sales number(4),city varchar2(20));
+/*================================================================================================*/
+/*12]*/
+
+create table Itemsales(Itemname varchar2(20),sales number(4),city varchar2(20));
 
 insert all
 into Itemsales(Itemname,sales,city) values('RAM',5,'PUNE')
@@ -188,12 +127,23 @@ select * from Itemsales;
 
 select city,count(sales) as SALES_FROM_CITIES from Itemsales group by city;
 
-====================================================================================================================================      
-Q.13 Make a table which stores the email id and password where password should not be saved if the length is less than 8 character.
+===================================================================================================
+/*13]*/
 
+create table email(email_id varchar2(20),password varchar2(20) check(length(password)>8));
 
-============================================================================================================================================================
-Q.14 Make a table which stores the name and mobile no of customers. where mobile no can not saved in database if the mobile no is less than 10 digits.
+insert into email values('abhishek28@gmail.com','123456789')
+
+insert into email values('abhishek7@gmail.com','099787')
+
+select * from email;
+
+alter table email drop column password check;
+
+drop table email;
+
+/*================================================================================================*/
+/*14]*/
 
 create table cus3(name varchar2(20),phone number,check (phone >=1000000000));
 insert into cus3 values('ABHISHEK',1267237587);
@@ -201,10 +151,12 @@ insert into cus3 values('ABHISHEK',1267237587);
 insert into cus3 values('AVINASH',5563278);
 select * from cus3;
 
-============================================================================================================================================================
-Q.15 Create a table person which stores the ID,name,email where define ID as primary key.Create another table Birthday which stores date of birth and ID.
-     Join both tables and create Foreign key in Birthday.
+DROP TABLE CUS3;
 
+commit;
+
+/*==========================================================================*/
+/*15]*/
 create table person2(eid number(4),name varchar2(20),email varchar2(20), primary key(eid));
 create table birthday(dob date,id number(04) CONSTRAINT ck_id REFERENCES person2(eid));
 
@@ -234,12 +186,11 @@ into birthday(dob,id) values(date '1998-12-03',106)
 select * from dual;
 
 select e.name,a.dob,e.email from person2 e,birthday a where e.eid = a.id;
-============================================================================================================================================================
-Q.16 Create a table where records of an employee is maintained . 
-     Fields are EID (primary key), Ename (NOT NULL), officeno (Unique), DateOfJoining(NOT NULL),CompanyName(Default),Salary(Check is : salary > 0)
-     Create PersonnelDetails : ID( Foreign Key ) , Addres (NOT NULL), contactno(NOT NULL , UNIQUE) 
-     Join Both tables and Display output
 
+commit;
+
+/*========================================================================*/
+/*16]*/
 create table rcemployee(eid number,ename varchar2(20) NOT NULL,officeno number(15),Dateofjoining date NOT NULL,companyname varchar2(20) default 'DIGIT',salary number(5) check(salary > 0),primary key(eid),unique(officeno));
 create table personaldetails(address varchar2(20) NOT NULL,contactno number(10) NOT NULL ,id number(4) CONSTRAINT co_id REFERENCES rcemployee(eid),CONSTRAINT ck_con unique(contactno)); 
 
@@ -266,22 +217,9 @@ select x.eid,x.ename,x.officeno,x.Dateofjoining,x.companyname,x.salary,y.address
 drop table rcemployee;
 drop table personaldetails;
 commit;
-============================================================================================================================================================================================================================================
 
-Q.17  Create a table Students ---- Rollno( Primary Key ), 
-                                   Name (NOT NULL)
-  
-      Create a table College ----- CollegeId ( Primary Key ),
-                                   EnrollId (Foreign Key ), 
-                                   College Name,
-                                   AdmissionDate,
-                                   ContactNo
-
-  a) Join these tables and show the output as
-                                            RollNo  , Name , College Name , Admission Date , Contact No 
-  b) Remove Primary Key constraint from college
-  c) Input the details of 5 students for a differnt college
-  d)  Group all the students based on collegeName
+/*====================================================================================================================================================*/
+/*17]*/
 
 create table students1(rollno number(3),cname varchar2(20) NOT NULL,enrollno varchar2(30),primary key(enrollno));
 create table college2(college_id varchar2(20),college_name char(30),admission_date date,contact_no number(10),enrollment_id varchar2(30) CONSTRAINT con_enr REFERENCES students1(enrollno),primary key(college_id));
@@ -327,11 +265,10 @@ select college_name,count(college_name) as TOTAL_STUDENTS from college3 group by
 drop table students1;                                                      
 drop table college2;
 commit;
-=====================================================================================================================================================================
 
-Q.18 Create a table which stores PersonName(Not Null),Mobile(Unique),Address.  Create two views v1 and v2 on the table. v1 is read only but v2 is updatable.
-      v1 shows personName and Mobile while v2 shows PersonName and Address.
+==============================================================================================================================
 
+/*18]*/
 
 create table person4(person_name varchar2(20) not null,mobile number(10) unique,address varchar2(20));
 
@@ -352,10 +289,10 @@ create view v2_per as select * from person4;
 select person_name,mobile from v1_per;
 select person_name,address from v2_per;
 
-Commit;
 
-=========================================================================================================================================================================
-Q.19 Create a PL/SQL Block which declares the radius of a circle and make a constant pi and assign values as 3.14 to it. Find the area of circle and Print area.
+================================================================================================================================
+
+/*19]*/
 
 SET SERVEROUTPUT ON 
 
@@ -370,24 +307,196 @@ dbms_output.put_line('AREA OF THE CIRCLE : '|| AREA);
 END;
 /
 
-======================================================================================================================================================================
-Q.20 PRINT ALL ALPHABETS IN UPPERCASE IN DESCENDING ORDER
+DECLARE
+v1 number;
+v2 number;
+BEGIN
+v1 := 100;
+v2 := 200;
+    if(v1<v2)then
+    dbms_output.put_line(v1 || ' IS LESS THAN '|| v2);
+    elsif(v2<v1)then
+    dbms_output.put_line(v2 || ' IS LESS THAN '|| v1);
+    else
+    dbms_output.put_line(v2 || ' LESS THAN '|| v1);
+    end if;
+end;
+
+========================================================================
+/*20*/
+SET SERVEROUTPUT ON
+
+DECLARE
+i integer := 90;
+j integer := 65;
+a char;
+BEGIN
+WHILE i>=j LOOP
+a := CHR(i);
+dbms_output.put_line(a);
+i := i-1;
+END LOOP;
+END;
+
+=======================================================================
+/*21*/
+SET SERVEROUTPUT ON
+
+DECLARE
+i integer := 97;
+j integer := 122;
+a char;
+BEGIN
+WHILE i<=j LOOP
+a := CHR(i);
+dbms_output.put_line(a);
+i := i+1;
+END LOOP;
+END;
+
+=======================================================================
+/*22]*/
+DECLARE 
+        v number :=10;
+BEGIN
+    WHILE v<=30 LOOP  
+    IF mod(v,2)=0 THEN
+    dbms_output.put_line('EVEN NUMBER : '||v);
+    END IF;
+    v := v+1; 
+    END LOOP;
+END;
+==========================================================================
+/*23]*/
+
+===========================================================================
+/*24]*/
+
+===========================================================================
+/*25*/
+
+DECLARE
+TYPE names IS VARRAY(5) OF CHAR(20);
+nm names;
+BEGIN
+nm := names('abhishek','abhinav','nimesh','nilesh','yogurt');
+for k in 1..5 loop
+dbms_output.put_line(UPPER(nm(k)));
+end loop;
+end;
+
+============================================================================
+/*26*/
+
+DECLARE
+TYPE names IS VARRAY(5) OF VARCHAR(20);
+nm names;
+BEGIN
+nm := names('abhishek','abhinav','nimesh','nilesh','yogurt');
+for k in 1..5 loop
+dbms_output.put_line(UPPER(nm(k)) || ':' || length(nm(k)));
+end loop;
+end;
+
+=============================================================================
+/*27*/
 
 
-====================================================================================================================================================================
-Q.21 PRINT ALL APLHABETS FROM a to z IN ASCENDING
+==============================================================================
+/*28*/
+CREATE OR REPLACE PROCEDURE demo_pr(x1 in real,x2 out real)
+IS
+pi CONSTANT double precision := 3.14;
+BEGIN
+x2 := pi * x1 *x1;
+END;
+
+DECLARE
+i real;
+BEGIN
+demo_pr(10,i);
+dbms_output.put_line('AREA OF CIRCLE : '|| i);
+END;
+
+=============================================================================
+/*29]*/
+
+CREATE OR REPLACE PROCEDURE demo_ptr2(x1 IN OUT REAL)
+IS
+BEGIN 
+x1 := x1 * x1 * x1;
+END;
+
+DECLARE
+i real;
+BEGIN
+i := 12;
+demo_ptr2(i);
+dbms_output.put_line('CUBE :'|| i);
+END;
+
+==================================================================================================================================
+/*30]*/
 
 
-===================================================================================================================================================================
-Q.22 PRINT ALL EVEN NUMBERS BETWEEN 10 AND 30 USING WHILE LOOP.USE IF CONDITION TO CHECK.
+/*a]   b]*/
+create table tap(eid number(5) primary key,name varchar(30) not null,age number(3) not null,check(age > 18));
+
+drop table tap;
+select * from tap;
+
+create or replace procedure INSERTRECORD(eid in number,name in varchar2,age in number)
+IS
+BEGIN
+insert into tap values(eid,name,age);
+END;
+
+DECLARE
+BEGIN
+INSERTRECORD(101,'ABHISHEK',20);
+INSERTRECORD(343,'ABHISH',34);
+INSERTRECORD(208,'ABHINANDAN',23);
+INSERTRECORD(657,'XAVIER',31);
+INSERTRECORD(554,'SHRIKANT',32);
+END;
+
+DECLARE 
+BEGIN
+/*c]*/
+update tap set eid = 201,name = 'NIMESH',age = 29 where eid = 208;
+END;
+
+DECLARE
+BEGIN
+/*d]*/
+delete from tap where eid = 201;
+END;
+
+/*e]*/
+END;
+
+/*f]*/
+select * from tap;
+
+CREATE OR REPLACE PROCEDURE showrec(no in number)
+IS
+i number(5);
+n varchar2(30);
+a number(3);
+BEGIN
+select eid,name,age into i,n,a from tap where eid = no;
+dbms_output.put_line(i || ' ' || n || ' ' || a);
+END;
+
+execute showrec(343);
+
+/*g*/
+DECLARE
+BEGIN
+select * from tap ORDER BY age asc;
+END;
+
+=================================================================================
 
 
-=====================================================================================================================================================================
-Q.23 PRINT ALPHABETS IN REVERSE ORDER USING FOR LOOP.
-
-
-==========================================================================================================================================================================
-Q.24 PRINT THE FACTORIAL OF A NUMBER USING FOR LOOP.
-
-
-========================================================================================================================================================================
+================================================
