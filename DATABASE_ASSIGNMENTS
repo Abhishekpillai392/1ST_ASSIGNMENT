@@ -323,3 +323,325 @@ v2 := 200;
 end;
 
 ========================================================================
+/*20*/
+SET SERVEROUTPUT ON
+
+DECLARE
+i integer := 90;
+j integer := 65;
+a char;
+BEGIN
+WHILE i>=j LOOP
+a := CHR(i);
+dbms_output.put_line(a);
+i := i-1;
+END LOOP;
+END;
+
+=======================================================================
+/*21*/
+SET SERVEROUTPUT ON
+
+DECLARE
+i integer := 97;
+j integer := 122;
+a char;
+BEGIN
+WHILE i<=j LOOP
+a := CHR(i);
+dbms_output.put_line(a);
+i := i+1;
+END LOOP;
+END;
+
+=======================================================================
+/*22]*/
+DECLARE 
+        v number :=10;
+BEGIN
+    WHILE v<=30 LOOP  
+    IF mod(v,2)=0 THEN
+    dbms_output.put_line('EVEN NUMBER : '||v);
+    END IF;
+    v := v+1; 
+    END LOOP;
+END;
+==========================================================================
+/*23]*/
+DECLARE
+C char;
+BEGIN
+FOR K IN REVERSE 65..90 LOOP
+C := CHR(K);
+dbms_output.put_line(C);
+END LOOP;
+END;
+
+===========================================================================
+/*24]*/
+
+===========================================================================
+/*25*/
+
+DECLARE
+TYPE names IS VARRAY(5) OF CHAR(20);
+nm names;
+BEGIN
+nm := names('abhishek','abhinav','nimesh','nilesh','yogurt');
+for k in 1..5 loop
+dbms_output.put_line(UPPER(nm(k)));
+end loop;
+end;
+
+============================================================================
+/*26*/
+
+DECLARE
+TYPE names IS VARRAY(5) OF VARCHAR(20);
+nm names;
+BEGIN
+nm := names('abhishek','abhinav','nimesh','nilesh','yogurt');
+for k in 1..5 loop
+dbms_output.put_line(UPPER(nm(k)) || ':' || length(nm(k)));
+end loop;
+end;
+
+=============================================================================
+/*27*/
+DECLARE
+c char := 'a';
+BEGIN
+dbms_output.put_line(UPPER(c));
+END;
+
+==============================================================================
+/*28*/
+CREATE OR REPLACE PROCEDURE demo_pr(x1 in real,x2 out real)
+IS
+pi CONSTANT double precision := 3.14;
+BEGIN
+x2 := pi * x1 *x1;
+END;
+
+DECLARE
+i real;
+BEGIN
+demo_pr(10,i);
+dbms_output.put_line('AREA OF CIRCLE : '|| i);
+END;
+
+=============================================================================
+/*29]*/
+
+CREATE OR REPLACE PROCEDURE demo_ptr2(x1 IN OUT REAL)
+IS
+BEGIN 
+x1 := x1 * x1 * x1;
+END;
+DECLARE
+i real;
+BEGIN
+i := 12;
+demo_ptr2(i);
+dbms_output.put_line('CUBE :'|| i);
+END;
+
+==================================================================================================================================
+/*30]*/
+/*a]   b]*/
+create table tap(eid number(5) primary key,name varchar(30) not null,age number(3) not null,check(age > 18));
+
+drop table tap;
+select * from tap;
+
+create or replace procedure INSERTRECORD(eid in number,name in varchar2,age in number)
+IS
+BEGIN
+insert into tap values(eid,name,age);
+END;
+
+DECLARE
+BEGIN
+INSERTRECORD(101,'ABHISHEK',20);
+INSERTRECORD(343,'ABHISH',34);
+INSERTRECORD(208,'ABHINANDAN',23);
+INSERTRECORD(657,'XAVIER',31);
+INSERTRECORD(554,'SHRIKANT',32);
+END;
+
+DECLARE 
+BEGIN
+/*c]*/
+update tap set eid = 201,name = 'NIMESH',age = 29 where eid = 208;
+END;
+
+DECLARE
+BEGIN
+/*d]*/
+delete from tap where eid = 201;
+END;
+
+/*e]*/
+END;
+
+/*f]*/
+select * from tap;
+
+CREATE OR REPLACE PROCEDURE showrec(no in number)
+IS
+i number(5);
+n varchar2(30);
+a number(3);
+BEGIN
+select eid,name,age into i,n,a from tap where eid = no;
+dbms_output.put_line(i || ' ' || n || ' ' || a);
+END;
+
+execute showrec(343);
+
+/*g*/
+DECLARE
+BEGIN
+select * from tap ORDER BY age asc;
+END;
+
+=================================================================================
+/*31]*/
+
+CREATE OR REPLACE FUNCTION insert_fun(name in varchar2,age in number) RETURN VARCHAR2
+AS
+BEGIN
+return name;
+END;
+
+CREATE OR REPLACE FUNCTION ret_age(name in varchar2,age in number) RETURN number
+AS
+BEGIN
+return age;
+END;
+
+DECLARE
+nma varchar2(20);
+gem varchar2(20);
+BEGIN
+nma := insert_fun('avinash',33);
+gem := ret_age('avinash',33);
+dbms_output.put_line(UPPER(nma) || ' ' || gem);
+END;
+=========================================================================================
+/*32*/
+
+CREATE TABLE EMPLOYEE5(ename varchar2(20), salary number(4));
+select * from EMPLOYEE5;
+
+CREATE OR REPLACE PROCEDURE insert_nmsal(ename in varchar2, salary in number) 
+IS
+BEGIN
+insert into EMPLOYEE5 values(ename,salary);
+END;
+
+BEGIN
+insert_nmsal('AVINASH',40000);
+insert_nmsal('MAYUR',38000);
+insert_nmsal('DIMINICK',35000);
+END;
+
+CREATE OR REPLACE FUNCTION avg_sal RETURN NUMBER
+AS
+c number;
+BEGIN
+select avg(salary) into c from EMPLOYEE5;
+return c;
+END;
+
+DECLARE 
+a number;
+BEGIN
+a := avg_sal;
+dbms_output.put_line('AVERAGE SAL :' || a);
+END;
+
+============================================================================================
+/*33]*/
+select * from tap;
+
+CREATE OR REPLACE PROCEDURE showrec3(no in number)
+IS
+record tap%rowtype;
+BEGIN
+select * into record from tap where eid = no;
+dbms_output.put_line('RECORD : '||record.name || ' ' || record.age);
+END;
+
+EXECUTE showrec3(101);
+
+==============================================================================================
+/*34]*/
+
+CREATE OR REPLACE FUNCTION demo_thy(x1 in integer) RETURN INTEGER
+AS
+a integer;
+BEGIN
+a := x1;
+RETURN a;
+END;
+
+DECLARE
+i integer := 35;
+x2 integer := 0;
+b integer;
+BEGIN
+b := demo_thy(i);
+
+dbms_output.put_line(b / x2);
+
+EXCEPTION
+
+WHEN NO_DATA_FOUND then
+dbms_output.put_line('NO DATA FOUND');
+WHEN TOO_MANY_ROWS then
+dbms_output.put_line('DATABASE GIVES TOO MANY ROWS');
+WHEN ZERO_DIVIDE then
+dbms_output.put_line('NUMBER CANNOT BE DIVIDED BY ZERO');
+WHEN OTHERS THEN
+dbms_output.put_line('UNKNOWN EXCEPTIONS');
+END;
+
+COMMIT;
+================================================
+/*35*/
+
+create table IDCARD(name varchar2(30),age number(3),city varchar2(20));
+
+CREATE OR REPLACE PROCEDURE INSERT_REC(name in varchar2, age in number, city in varchar2)
+IS
+myexception exception;
+BEGIN
+IF age <= 22 then
+RAISE myexception;
+ELSE
+INSERT INTO IDCARD values(name,age,city);
+END IF;
+
+EXCEPTION
+WHEN NO_DATA_FOUND THEN
+dbms_output.put_line('NO DATA TO BE ENTERED');
+WHEN myexception then
+dbms_output.put_line('AGE MUST BE GREATER THAN 22');
+END;
+
+BEGIN
+INSERT_REC('ABHINAV',21,'PUNE');
+INSERT_REC('DURVESH',23,'MUMBAI');
+INSERT_REC('TANMAY',22,'BANGALORE');
+INSERT_REC('SOHAM',26,'NAGPUR');
+
+dbms_output.put_line('DATA SUCCESSFULLY SAVED');
+END;
+
+SELECT * FROM IDCARD;
+DROP TABLE IDCARD;
+COMMIT;
+
+=========================================================================================
+
