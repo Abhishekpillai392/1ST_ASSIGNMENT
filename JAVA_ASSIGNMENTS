@@ -460,6 +460,121 @@ public class ASSIGN9 {
 Q.10 Create an array of names of 3 students and display names with length.
 =
 
+package basicprograms5;
 
+import java.util.Scanner;
+
+class array {
+	String name;
+	int len;
+	public void names(String nm)
+	{
+		name = nm;
+		len = nm.length();
+	}
+	public void show(int i)
+	{
+		System.out.println("NAME "+(i+1)+" : "+name);
+		System.out.println("LENGTH "+(i+1)+" : "+len);
+	}
+}
+public class ASSIGN10 {
+
+	public static void main(String[] args) {
+		array arr[] = new array[3];
+		
+		Scanner st = new Scanner(System.in);
+		
+		for(int i=0;i<arr.length;i++)
+		{
+			arr[i] = new array();
+			
+			System.out.println("ENTER THE NAMES "+(i+1)+" : ");
+			String nm = st.nextLine();
+			
+			arr[i].names(nm);
+		}
+		for(int i = 0;i<arr.length;i++)
+		{
+            arr[i].show(i);
+	    }
+
+	}
+}
+
+====================================================================================================================
 Q.11 Make an array of 10 numbers and print the average of only even numbers.
+=
+
+package basicprograms5;
+
+import java.util.Scanner;
+
+class array2 {
+	double avg;
+	public void getavg(double nun)
+	{
+		avg = nun;
+		System.out.println("AVERAGE OF 10 NUMBERS IS : "+avg);
+	}	
+}
+public class ASSIGN11 {
+	
+	public static void main(String[] args) {
+		double sum = 0.0;
+		double avg;
+		int con = 0;
+		int arr[] = new int[10];
+		
+		array2 ag = new array2();
+		Scanner sd = new Scanner(System.in);
+		
+		for(int i=0;i<arr.length;i++)
+		{
+			System.out.println("ENTER THE NUMBER "+(i+1)+" : ");
+		    arr[i] = sd.nextInt();
+		    
+		    sum = sum + arr[i];
+		    con++;
+		}
+		avg = sum / con;
+		
+		ag.getavg(avg);	
+		
+	}
+
+}
+
+==========================================================================================================
 Q.12 Create an array of 5 double values and use foreach loop to print every value.
+=
+
+
+Q.13 Write a program to make a class as Factorial where calculate the factorial in a function the function returns the factorial of the passed number to this function. 
+     Print the factorial of the number.
+=
+
+
+Q.14 Create a Class Alphabets which is printing Capital case alphabets in its member method. Create another Class where a main function resides. In main method create 
+    the object of Alphabets class and call the method which is printing alphabets.
+=
+
+
+Q.15 Write a program to create a method in a class which takes the first name as first parameter and last name as second parameter. This method returns the full name. 
+    Print full name.
+=
+
+
+Q.16 Write a program to overload a method named as getResult() 3 times , first definition prints the cube of passed number. Second function prints square of passed 
+     number. Third definition print that number.
+=
+
+
+Q.17 Write a program to find the sum of digits of a number.
+=
+
+
+Q.18 Write a program to create two objects of a class named as Numbers. In which there is a function getMax(). Assign a value for a number to every object and 
+     compare two objects together and print the maximum value
+=
+
