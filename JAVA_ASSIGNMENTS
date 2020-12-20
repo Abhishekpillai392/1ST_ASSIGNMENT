@@ -592,6 +592,46 @@ Q.14 Create a Class Alphabets which is printing Capital case alphabets in its me
     the object of Alphabets class and call the method which is printing alphabets.
 =
 
+package basicprograms5;
+
+public class Alphabetsa {
+	public String alpha;
+    public Alphabetsa(String a)
+    {
+   	 if(a.length()==1)
+   	 {
+    	alpha = a;
+   	 }
+    }
+    public void print()
+    {
+    	System.out.println("ALPHABET IS : "+alpha.toUpperCase());
+    }
+	public static void main(String[] args) {	
+	}
+
+}
+
+package basicprograms5;
+
+public class Access  {
+
+	public static void main(String[] args) {
+		
+		Alphabetsa ab1 = new Alphabetsa("a");
+		Alphabetsa ab2 = new Alphabetsa("t");
+		Alphabetsa ab3 = new Alphabetsa("c");
+		Alphabetsa ab4 = new Alphabetsa("l");
+		Alphabetsa ab5 = new Alphabetsa("z");
+		
+		ab1.print();
+		ab2.print();
+		ab3.print();
+		ab4.print();
+		ab5.print();
+	}
+
+}
 
 Q.15 Write a program to create a method in a class which takes the first name as first parameter and last name as second parameter. This method returns the full name. 
     Print full name.
