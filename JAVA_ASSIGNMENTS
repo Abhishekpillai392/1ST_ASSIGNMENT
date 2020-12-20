@@ -587,7 +587,7 @@ Q.13 Write a program to make a class as Factorial where calculate the factorial 
      Print the factorial of the number.
 =
 
-
+===================================================================================================================================================================================
 Q.14 Create a Class Alphabets which is printing Capital case alphabets in its member method. Create another Class where a main function resides. In main method create 
     the object of Alphabets class and call the method which is printing alphabets.
 =
@@ -633,21 +633,151 @@ public class Access  {
 
 }
 
+========================================================================================================================================================================
 Q.15 Write a program to create a method in a class which takes the first name as first parameter and last name as second parameter. This method returns the full name. 
     Print full name.
 =
 
+package basicprograms5;
 
+import java.util.Scanner;
+
+class method {
+	String fname,lname;
+      public void getmeth(String a,String b)
+      {
+    	  fname = a;
+    	  lname = b;
+      }
+      
+      public void showfullnm()
+      {
+    	  System.out.println("FULL NAME : "+fname+" "+lname);
+      }
+}
+public class ASSIGN15 {
+
+	public static void main(String[] args) {
+    method y = new method();
+    
+    Scanner s = new Scanner(System.in);
+    System.out.println("ENTER THE FIRST NAME : ");
+    String ab = s.nextLine();
+    
+    System.out.println("ENTER THE LAST NAME : ");
+    String bc = s.nextLine();
+    
+    y.getmeth(ab,bc);
+    
+    y.showfullnm();
+	}
+
+}
+=================================================================================================================================================================================
 Q.16 Write a program to overload a method named as getResult() 3 times , first definition prints the cube of passed number. Second function prints square of passed 
      number. Third definition print that number.
 =
 
 
+public class ASSIGN16 {
+
+	double getresult(double a)
+	{
+		double res;
+		res = a*a*a;
+		return res;
+		
+	}
+	int getresult(int b)
+	{
+		int res;
+		res = b*b;
+		return res;
+	}
+	float getresult(float c)
+	{
+		return c;
+	}
+	public static void main(String[] args) {
+		ASSIGN16 a = new ASSIGN16();
+		
+		System.out.println(a.getresult(10.3456));
+		System.out.println(a.getresult(35));
+		float h = (float)23.34398483;
+		System.out.println(a.getresult(h));
+	}
+
+}
+
+=================================================================================================================================================================
 Q.17 Write a program to find the sum of digits of a number.
 =
 
+import java.util.Scanner;
 
+public class ASSIGN17 {
+	public long hub;
+    public long digit(long ab)
+    {
+    	long rem;
+    	long sum = 0;
+    	
+        while(ab!='\0')
+        {
+        	rem = ab%10;
+        	sum = sum + rem;
+        	ab = ab/10;
+        }
+        System.out.println("SUM OF DIGITS : "+sum);
+        hub = sum;
+        return hub;
+    }
+	public static void main(String[] args) {
+		ASSIGN17 ass = new ASSIGN17();
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.println("ENTER THE NUMBER : ");
+		int sub = sc.nextInt();
+		
+		ass.digit(sub);		
+	}
+
+}
+
+===================================================================================================================================================================
 Q.18 Write a program to create two objects of a class named as Numbers. In which there is a function getMax(). Assign a value for a number to every object and 
      compare two objects together and print the maximum value
 =
+
+class numbers {
+	int number;
+	public numbers(int x) 
+	{
+		number = x;
+	}
+	void getmax(numbers num1,numbers num2)
+	{
+		if(num1.number > num2.number)
+		{
+			System.out.println(num1.number+" is the maximum value");
+		}
+		else
+		{
+			System.out.println(num2.number+" is the maximum value");
+		}
+	}
+}
+public class ASSIGN18 {
+
+	public static void main(String[] args) {
+		numbers num1 = new numbers(100);
+		numbers num2 = new numbers(200);
+		
+		num1.getmax(num1,num2);
+	}
+
+}
+
+======================================================================================================================================================
+
 
