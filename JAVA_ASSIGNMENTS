@@ -529,13 +529,17 @@ public class ASSIGN11 {
 		array2 ag = new array2();
 		Scanner sd = new Scanner(System.in);
 		
+		
 		for(int i=0;i<arr.length;i++)
 		{
 			System.out.println("ENTER THE NUMBER "+(i+1)+" : ");
 		    arr[i] = sd.nextInt();
 		    
+		    if(arr[i]%2==0)
+		    {
 		    sum = sum + arr[i];
 		    con++;
+		    }
 		}
 		avg = sum / con;
 		
@@ -549,7 +553,36 @@ public class ASSIGN11 {
 Q.12 Create an array of 5 double values and use foreach loop to print every value.
 =
 
+package basicprograms5;
 
+import java.util.Scanner;
+
+class ass {
+	Scanner sd = new Scanner(System.in);
+	double ay[] = new double[5];
+	public void foreach()
+	{
+		for(int i=0;i<ay.length;i++)
+		{
+			System.out.println("ENTER DOUBLE VALUE : ");
+			ay[i] = sd.nextDouble();
+		}
+		for(double d : ay)
+		{
+			System.out.println("VALUES : "+d);
+		}
+	}
+}
+public class ASSIGN12 {
+
+	public static void main(String[] args) {
+    ass a = new ass();
+    
+    a.foreach();
+	}
+
+}
+===================================================================================================================================================================================
 Q.13 Write a program to make a class as Factorial where calculate the factorial in a function the function returns the factorial of the passed number to this function. 
      Print the factorial of the number.
 =
