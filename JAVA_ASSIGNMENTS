@@ -855,5 +855,59 @@ public class ASSIGN18 {
 }
 
 ======================================================================================================================================================
+Q.19 Create an interface named as Calculator and create a method in it as getResult(). 
+     7 class are to be defined which are implementing Calculator interface.
+     Class A will return factorial of a number.    (Vishal)
+     Class B will return square of a number.       (Saloni)
+     Class C will return maximum of two numbers.   (Hemant)
+     Class D will print numbers from 1 to 50.      (Josephine)
+     Class E will return the sum of 5 digit number. (Nimesh)
+     Class F will return the sum of 5 values in an array.  (Abhishek)
+     Class G will return the temperature in celcius for the given ferhenite value. (Nilesh)
+
+=
+
+package basicprograms5;
+
+import java.util.Scanner;
+
+interface Calculator
+{
+	public double getResult(double b);
+}
+
+class sum_of_array implements Calculator {
+
+	@Override
+	public double getResult(double ab) {
+		double sum = 0;
+		double arr[] = new double[5];
+		
+		Scanner sy = new Scanner(System.in);
+		
+		for(int i=0;i<arr.length;i++)
+		{
+			System.out.println("ENTER ARRAY NUMBER "+(i+1)+" : ");
+			arr[i] = sy.nextDouble();				
+		}
+		
+		for(int i=0;i<arr.length;i++)
+		{
+			sum = sum + arr[i];
+		}
+	return sum;
+   }
+	
+}
+
+public class ASSIGN19 {
+
+	public static void main(String[] args) {
+		sum_of_array soa = new sum_of_array();
+		
+		System.out.println(soa.getResult(0));
+	}
+
+}
 
 
