@@ -1,8 +1,6 @@
 Q.1 Create a program to Assign username & password in a method and display the username, password in a different function.
+
 =
-
-
-//ASSIGN : 1
 
 package BasicPrograms;
 
@@ -36,7 +34,7 @@ public class ASSIGN1 {
 
 }
 
-==================================================================================================================================================================
+
 Q.2 Write a program to Define employee Company as static and display the details of employee like eid,ename,salary with company name for 5 employees.
 =
 
@@ -102,7 +100,7 @@ public class ASSIGN2 {
      }
 }
 	
-==========================================================================================================================================
+
 Q.3 Create a method in a class which accepts a double and integer parameters and display the multiplication of passed values.
 =
 
@@ -131,7 +129,7 @@ public class ASSIGN3 {
 	}
 }
 
-=============================================================================================================================================================
+
 Q.4 Write a program where a class is having a function as display() which declares a city code as a local variable in it and give some default city code value in it. 
     Display () method display the city name which is passed to this method along with the city code.
 =
@@ -158,8 +156,11 @@ public class ASSIGN4 {
 
 }
 
-=============================================================================================================================================================================
+
+
+
 Q.5 Write a program to enter a year and check if the year is a leap year or not.
+
 =
 
 package BasicPrograms;
@@ -201,7 +202,7 @@ public class ASSIGN5 {
 
 }
 
-==============================================================================================================================================
+
 Q.6 Create a program to check for a number entered by user is Positive , negative or zero.
 =
 
@@ -241,7 +242,7 @@ public class ASSIGN6 {
 
 }
 
-===============================================================================================================================================================================
+
 Q.7 Write a program to enter the height of a person in cm and weight of a person in kg, Calculate the BMI. If BMI value is less tha 18.5 then show "Underweight",
      BMI is in range from 18.5 to 24.9 show "Normal Weight" , If range is 25 to 25.9 then show "Overweight" otherwise show "Obesity"
      =
@@ -309,7 +310,7 @@ public class ASSIGN7 {
 
 }
 
-========================================================================================================================================================================
+
 Q.8 Create a class Employee . Declare name, yearOfExperiance, Salary. Create a method which takes the details from user. Take records of 5 employees using Array of 
 objects. Create a method which checks the years of experiance of an employee. If Experiance is more than 3 years then Give 5000/- Rs Bonus to the employees .
   If Experiance is more than 1 year & less than 3 years then Give bonus of 1000/- Rs. If Experiance is less than 1 year , no bonus will be given. Display the 
@@ -392,7 +393,7 @@ public class ASSIGN8 {
 	}
 }
 
-========================================================================================================================================================================
+
   
 Q.9 Write a program to create a Menu based program where perform the following operations.
     Product (Class) : pid,pname,Description,cost
@@ -531,7 +532,7 @@ public class ASSIGN9 {
 
 }
 
-=====================================================================================================================================================================================================
+
   
 Q.10 Create an array of names of 3 students and display names with length.
 =
@@ -578,7 +579,7 @@ public class ASSIGN10 {
 	}
 }
 
-====================================================================================================================
+
 Q.11 Make an array of 10 numbers and print the average of only even numbers.
 =
 
@@ -625,7 +626,7 @@ public class ASSIGN11 {
 
 }
 
-==========================================================================================================
+
 Q.12 Create an array of 5 double values and use foreach loop to print every value.
 =
 
@@ -658,12 +659,12 @@ public class ASSIGN12 {
 	}
 
 }
-===================================================================================================================================================================================
+
 Q.13 Write a program to make a class as Factorial where calculate the factorial in a function the function returns the factorial of the passed number to this function. 
      Print the factorial of the number.
 =
 
-===================================================================================================================================================================================
+
 Q.14 Create a Class Alphabets which is printing Capital case alphabets in its member method. Create another Class where a main function resides. In main method create 
     the object of Alphabets class and call the method which is printing alphabets.
 =
@@ -709,7 +710,7 @@ public class Access  {
 
 }
 
-========================================================================================================================================================================
+
 Q.15 Write a program to create a method in a class which takes the first name as first parameter and last name as second parameter. This method returns the full name. 
     Print full name.
 =
@@ -749,7 +750,7 @@ public class ASSIGN15 {
 	}
 
 }
-=================================================================================================================================================================================
+
 Q.16 Write a program to overload a method named as getResult() 3 times , first definition prints the cube of passed number. Second function prints square of passed 
      number. Third definition print that number.
 =
@@ -785,7 +786,7 @@ public class ASSIGN16 {
 
 }
 
-=================================================================================================================================================================
+
 Q.17 Write a program to find the sum of digits of a number.
 =
 
@@ -820,7 +821,7 @@ public class ASSIGN17 {
 
 }
 
-===================================================================================================================================================================
+
 Q.18 Write a program to create two objects of a class named as Numbers. In which there is a function getMax(). Assign a value for a number to every object and 
      compare two objects together and print the maximum value
 =
@@ -851,10 +852,8 @@ public class ASSIGN18 {
 		
 		num1.getmax(num1,num2);
 	}
-
 }
 
-======================================================================================================================================================
 Q.19 Create an interface named as Calculator and create a method in it as getResult(). 
      7 class are to be defined which are implementing Calculator interface.
      Class A will return factorial of a number.    (Vishal)
@@ -910,4 +909,132 @@ public class ASSIGN19 {
 
 }
 
+
+
+Q.20 Write a program to take first name and lastname as a command line arguments and print the full name in capital case along with the length of fullname.
+
+=
+
+package basicprograms5;
+
+public class com_line {
+
+	public static void main(String[] args) {
+		
+		String st = (args[0])+" "+(args[1]);
+		
+		System.out.println(st.toUpperCase());
+		System.out.println(st.length());
+	}
+}
+
+Q.21 Create a class Person. Create name,mobile,age as instance variables . Make getters and setters and display the records of 3 cusomers using array of objects and print records.
+
+=
+
+package basicprograms5;
+class Person1 {
+	public String name;
+	public long mobile;
+	public int age;
+	
+	public Person1()
+	{
+		name = "Ginny";
+		mobile = 9175647827L;
+		age = 23;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public long getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(long mobile) {
+		this.mobile = mobile;
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+}
+public class ASSIGN210 {
+
+	public static void main(String[] args) {
+		
+		Person1 arr[] = new Person1[3];
+		
+		arr[0] = new Person1();
+		arr[0].setName("RON WEASLEY");
+		arr[0].setMobile(9208877665L);
+		arr[0].setAge(25);
+		
+		arr[1] = new Person1();
+		arr[1].setName("HARRY");
+		
+		arr[2] = new Person1();
+		arr[2].setAge(27);
+		
+		System.out.println("======================DETAILS OF THE FIRST PERSON===================================");
+		System.out.println("NAME : "+arr[0].getName()+" || "+"MOBILE :"+arr[0].getMobile()+" || "+"AGE : "+arr[0].getAge());
+        
+		System.out.println("======================DETAILS OF THE SECOND PERSON===================================");
+		System.out.println("NAME : "+arr[1].getName()+" || "+"MOBILE :"+arr[1].getMobile()+" || "+" AGE : "+arr[1].getAge());
+        
+		System.out.println("======================DETAILS OF THE THIRD PERSON===================================");
+		System.out.println("NAME : "+arr[2].getName()+" || "+"MOBILE :"+arr[2].getMobile()+" || "+" AGE : "+arr[2].getAge());     	
+	}
+
+}
+
+
+Q.22 Define name and salary of an employee both as a string variable. Define a method which updates the salary of an employee by 1000. Print updated salary with name.
+
+=
+
+package basicprograms5;
+class employ {
+	String name;
+	String salary;
+	
+	public void getdetails()
+	{
+		name = "Fred";
+		salary = "25000";
+		
+		System.out.println("NAME : "+name);
+		int salin  = Integer.parseInt(salary);
+		System.out.println("SALARY : "+salin);
+		
+	}
+	public void updsal()
+	{
+		System.out.println("NAME : "+name);
+		int sal = Integer.parseInt(salary)+1000;
+		System.out.println("SALARY : "+sal);
+	}
+}
+public class ASSIGN22 {
+
+	public static void main(String[] args) {
+		employ emp = new employ();
+		
+		emp.getdetails();
+		
+		System.out.println("SALARY AFTER BONUS==================================");
+		emp.updsal();
+	}
+
+}
 
