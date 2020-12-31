@@ -2290,9 +2290,11 @@ public class ASSIGN50 {
     boo.add(new book(102,200,"GREEN ","FAULT IN OUR STARS"));
     boo.add(new book(103,1995,"KUTCHESKY","RICH DAD,POOR DAD"));
     
-    for(book b : boo)
+    ListIterator<book> lb = boo.listIterator(boo.size());
+    
+    while(lb.hasPrevious())
     {
-    	System.out.println(b);
+    	System.out.println(lb.previous());
     }
   }
 
