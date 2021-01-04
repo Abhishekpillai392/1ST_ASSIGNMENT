@@ -2276,4 +2276,26 @@ public class ASSIGN50 {
 
 }
 
-======================================================
+==================================================================================================================================
+Q.51 Write a JDBC Program to do the following operations on the table given :
+      Employee : eid (primary key) , name (varchar2 not null), city varchar2, salary number
+     a) Insert 5 employee records using a stored Procedure.
+     b) Update the salary of the last record.
+     c) Delete the 3rd record.
+     d) Display name and salary for all employees.
+     e) Add 1000/- to the salary of all employees.
+     f) Count Total number of records having salary more than 10000.
+     g) Show all records in descending order of salary.
+     h) Show all records in Alphabetical order of names of employees.
+    
+=
+
+==========================================================================
+Q.52 Write a program to record the birth dates of 5 persons along with the names and do following : 
+     a) Show all records.
+     b) Use PreparedStatement to insert the records at run time.
+
+=
+
+
+==========================================================================================================================
