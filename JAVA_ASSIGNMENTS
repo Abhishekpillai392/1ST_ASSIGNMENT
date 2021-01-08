@@ -2399,6 +2399,7 @@ public class assign51 {
     
     System.out.println("SUCCESSFULLY DISPLAYED....");
     
+    //F]
     query = "select * from emp200 order by salary desc";
     
     rst = st.executeQuery(query);
