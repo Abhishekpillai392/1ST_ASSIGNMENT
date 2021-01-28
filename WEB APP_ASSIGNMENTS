@@ -1,1 +1,249 @@
+1.Create a Table of 3 columns and 4 records . Headings are : Sno, Name, Photo.
+
+=>
+
+<html>
+<body>
+<table border="5">
+
+<tr>
+<th style="padding: 10px">Sno</th>    
+<th>Name</th>
+<th>Photo</th>
+</tr>
+
+<tr>
+<td>1991</td>
+<td>TESLA</td>
+<td><img src="https://cdn.vox-cdn.com/thumbor/4QtOwnOxCdwESvt1-CpQSTZvHHA=/1400x1400/filters:format(jpeg)/cdn.vox-cdn.com/uploads/chorus_asset/file/19932738/1206292068.jpg.jpg" style="width: 500px;height: 500px" style="width: 500px;height: 500px"></td>
+</tr>
+
+<tr>
+<td>2007</td>   
+<td>APPLE</td>
+<td><img src="Steve_Jobs_Headshot_2010-CROP_(cropped_2).jpg" style="width: 500px;height: 500px"></td>
+</tr>
+    
+<tr>
+<td>1999</td>    
+<td>ALIBABA</td>
+<td><img src="Enabling_eCommerce-_Small_Enterprises,_Global_Players_(39008130265)_(cropped).jpg" style="width: 500px;height: 500px"></td>
+</tr>
+
+<tr>
+<td>1975</td>
+<td>MICROSOFT</td>
+<td><img src="bill-gates-2.jpg" style="width: 500px;height: 500px"></td>
+    
+</tr>
+</table>
+</body>
+</html>
+
+===============================================
+2.Create a hyperlink on the web page and this link will switch to other webpage. In second page there is a link as "Back" which will display the first page.
+
+=>
+
+//html - 1
+
+<html>
+<body>
+<a href="ass2b.html" style="color: cadetblue">GO TO NEXT</a><br>
+
+<br>
+<hr>
+<img src="https://cdn.vox-cdn.com/thumbor/4QtOwnOxCdwESvt1-CpQSTZvHHA=/1400x1400/filters:format(jpeg)/cdn.vox-cdn.com/uploads/chorus_asset/file/19932738/1206292068.jpg.jpg" style="width: 500px;height: 500px" style="width: 500px;height: 500px">
+<br>
+<hr>
+</body>
+</html>
+
+//html - 2
+
+<html>
+<body>
+
+<a href="ass2.html">BACK</a>
+</body>
+</html>
+
+===============================================
+3.Create a Paragraph and apply the tags on this paragraph : bold,italic,underline, Mark, strike ,superscript and subscript, emphasis,strong,big.
+
+=>
+
+<html>
+<body>
+
+<p>
+<h2><b>CONTEXT</b></h2>   
+<i>“This sentence has <del>five words</del>&nbsp; 5 words. Here are five more words.<u>Five-word</u> sentences are fine. But several together become <span style="background-color: aqua">monotonous</span>.<big>The sound of it drones</big>.<small>It’s like a stuck record</small>.<em>The ear demands some variety.</em></i>  
+<br>
+X<sup>2</sup>
+Y<sub>5</sub>
+
+</p>
+
+</body>
+</html>
+
+===============================================
+4.Create an image in the web page which has the width as 300 and height as 400 and display the title as "MyImage". Create same image as a hyperlink , clicking on the image will 
+  show the description about the image.
+
+=>
+
+//html - 1
+
+<html>
+<body>
+<a href="ass4b.html"><img src="bill-gates-2.jpg" title="MyImage" style="width: 300px;height: 400px"></a>
+
+</body>
+</html>
+
+//html - 2
+
+<html>
+<body>
+Description :
+    
+    <h2><B>THIS IMAGE IS OF THE FOUNDER OF MICROSFOT, BILL GATES</B></h2>
+    <br><br>
+    <h2>ALSO THE THIRD RICHEST PERSON IN THE WORLD</h2>
+</body>
+</html>
+===============================================
+5.Create a list of 3 website names and create every list item as a hyperlink.  
+
+=>
+
+//google.html
+
+<html>
+<body>
+<ol>
+<li><a href="http://www.google.com"><h3 style="background-color: aqua;color: black">VIST GOOGLE</h3></a></li>
+    
+<li><a href="https://github.com/"><h2 style="color: black;background-color: white">VIST GITHUB</h2></a></li>
+    
+<li><a href="https://www.youtube.com/"><h3 style="color: white;background-color: red">VISIT YOUTUBE</h3></a></li>
+    
+</ol>
+</body>
+</html>
+=========================================================
+
+6.Create a HomePage where a unorderd list is created in which the list items are the hyperlinks . On clicking a hyperlink the respective page should open.
+
+=>
+
+//main.jsp
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+
+<ul>
+<li><a href="page.jsp">GO TO PAGE 1</a>
+<li><a href="page2.jsp">GO TO PAGE 2</a>
+<li><a href="page3.jsp">GO TO PAGE 3</a>
+</ul>
+</body>
+</html>
+
+
+//PAGE 1
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="mystyle.css">
+</head>
+<body>
+<header>
+<p>
+
+This is a paragraph
+
+</p>
+</header>
+</body>
+</html>
+
+//PAGE 2
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="mystyle.css">
+
+</head>
+<body>
+<header>
+<div>
+THIS PAGE BELONGS ME ME
+
+</div>
+</header>
+</body>
+</html>
+
+//PAGE 3
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="mystyle.css">
+</head>
+<body>
+<footer>
+<p>
+
+THIS PAGE IS A html page 
+
+</p>
+</footer>
+</body>
+</html>
+
+//STYLE.CSS
+
+@charset "ISO-8859-1";
+
+header p,div
+{
+	background-color: black;
+	color: yellow;
+	text-align: center;
+}
+
+footer p
+{
+	background-color: black;
+	color: white;
+	text-align: center;
+}
+
+=================================================================================================================
+
 
