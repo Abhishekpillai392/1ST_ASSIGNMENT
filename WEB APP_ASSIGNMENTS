@@ -244,6 +244,60 @@ footer p
 	text-align: center;
 }
 
-=================================================================================================================
+============================================================================================================================================================
 
+7 ]Create a LoginPage in which background color of textbox should be skyblue. Placeholder should be applied and password length must be atleast 8 characters.
 
+=>
+
+//HTML
+<html>
+    <head>
+<style>
+       fieldset
+    {
+        background-color: skyblue;
+    }
+    legend
+    {
+        background-color: crimson;
+        text-align: center;
+    }
+        
+</style>
+    
+    
+    </head>
+<body>
+
+<form>
+<fieldset>
+<legend>DETAILS</legend>
+USERNAME<input type="text" placeholder="Enter username">
+PASSWORD<input type="password" placeholder="Enter password" minlength="8">
+<input type="submit">
+</fieldset>
+</form>    
+
+</body>
+</html>
+
+====================================================================================================================================================================
+
+9 ]Make an ordered list in reversed manner.
+
+=>
+
+//html
+
+<html>
+<body>
+<ol reversed>
+<li>first</li>
+<li>second</li>
+<li>third</li>
+<li>fourth</li>
+<li>fifth</li>
+</ol>
+</body>
+</html>
