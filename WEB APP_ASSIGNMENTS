@@ -40,7 +40,7 @@
 </body>
 </html>
 
-===============================================
+=======================================================================================================================================================================================================================
 2.Create a hyperlink on the web page and this link will switch to other webpage. In second page there is a link as "Back" which will display the first page.
 
 =>
@@ -68,7 +68,7 @@
 </body>
 </html>
 
-===============================================
+=======================================================================================================================================================================================================================
 3.Create a Paragraph and apply the tags on this paragraph : bold,italic,underline, Mark, strike ,superscript and subscript, emphasis,strong,big.
 
 =>
@@ -88,7 +88,7 @@ Y<sub>5</sub>
 </body>
 </html>
 
-===============================================
+=======================================================================================================================================================================================================================
 4.Create an image in the web page which has the width as 300 and height as 400 and display the title as "MyImage". Create same image as a hyperlink , clicking on the image will 
   show the description about the image.
 
@@ -114,7 +114,7 @@ Description :
     <h2>ALSO THE THIRD RICHEST PERSON IN THE WORLD</h2>
 </body>
 </html>
-===============================================
+=======================================================================================================================================================================================================================
 5.Create a list of 3 website names and create every list item as a hyperlink.  
 
 =>
@@ -133,7 +133,7 @@ Description :
 </ol>
 </body>
 </html>
-=========================================================
+=================================================================================================================================================================================================================================
 
 6.Create a HomePage where a unorderd list is created in which the list items are the hyperlinks . On clicking a hyperlink the respective page should open.
 
@@ -281,10 +281,104 @@ PASSWORD<input type="password" placeholder="Enter password" minlength="8">
 
 </body>
 </html>
+=======================================================================================================================================================================================================================
+8 ]Make a page where create a selection box of cities and a textarea where the information about city is to be entered. Once click on submit button the data is to be  stored in the database table as City along with description.
 
-====================================================================================================================================================================
+=>
 
-9 ]Make an ordered list in reversed manner.
+//html3.html
+
+<html>
+<body>
+<form action="serv1">
+<table border="4">
+<tr><td>CITY</td><td> 
+<select name="cy" autofocus multiple>
+<option selected>Select city...</option>
+<option>PUNE</option>    
+<option>MUMBAI</option>
+<option>SOLAPUR</option> 
+</select></td></tr>
+<tr><td>DESCRIPTION</td></tr>
+<tr><td><textarea rows="4" cols="4" style="resize:none;width: 300px;height: 300px" name="ds" ></textarea></td></tr>
+
+<tr><td><input type="submit"></td></tr>
+
+</table>
+</form>
+</body>
+</html>
+
+//SERV.1.java
+
+
+package PROJECTS;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class serv1 extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+    
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("text/html");
+		
+		PrintWriter pw = response.getWriter();
+	    
+		String city[] = request.getParameterValues("cy");
+		
+		String desc = request.getParameter("ds");
+	    
+	    try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			
+			Connection cn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","system","root");
+			
+			Statement st = cn.createStatement();
+			
+			if(city!=null)
+			{
+                 for(int i=0;i<city.length;i++)
+                 {
+                	 
+			     String query ="insert into ser values('"+city[i]+"','"+desc+"')";
+			    
+			     int k = st.executeUpdate(query);
+                 }
+			
+			}
+			else
+			{
+				pw.print("NOT SELECTED");
+			}
+			
+			pw.print("<br>INSERTED SUCCSSFULLY........");
+		}
+	    catch(Exception ea)
+	    {
+	    	ea.printStackTrace();
+	    }
+		
+	
+	}
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}
+
+===========================================================================
+9]Make an ordered list in reversed manner.
 
 =>
 
@@ -301,3 +395,424 @@ PASSWORD<input type="password" placeholder="Enter password" minlength="8">
 </ol>
 </body>
 </html>
+
+========================================================================================================================================================================
+10 Make a Page which includes contents of a text file in the middle of the page. Create two such pages and link them together using hyperlinks. Add some header and footer
+   in both pages where header background color should be pink and some text is displayed as heading. Footer will display the todays date in (dd-mm-yyyy) in red color in
+   center of the page.
+
+=>
+
+//jsp4.jsp
+
+
+<%@page import="java.time.LocalDate"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<link rel="stylesheet" type="text/css" href="styles.css">
+
+</head>
+<body bgcolor="black">
+<div style="background-color: aqua;">
+<p align="center"><jsp:include page="ass10.txt"></jsp:include></p>
+<hr>
+<span style="background-color: blue;"><a href="jsp4b.jsp" style="color: yellow;">GO TO NEXT JSP PAGE</a></span>
+</div>
+<header>
+
+<h3>
+THIS IS THE HEADER OF FIRST JSP PAGE OF THIS PROJECT
+</h3>
+
+</header>
+<div style="background-color: silver;">
+
+<footer>
+<div>
+<%
+out.print("TODAY'S DATE : ");
+LocalDate lc = LocalDate.now();
+out.print(lc);
+%>
+</div>
+</footer>
+</div>
+</body>
+</html>
+
+
+//ass10.txt
+
+THIS IS A TEXT FILE 1 
+FOR THE FIRST JSP PAGE
+
+
+//jsp4b.jsp
+
+<%@page import="java.time.LocalDate"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="styles.css">
+
+</head>
+<body bgcolor="black">
+<div style="background-color: lime;">
+
+<p align="center"><jsp:include page="ass10b.txt"></jsp:include></p>
+ 
+</div>
+
+<header>
+<h3>
+THIS IS THE HEADER OF SECOND JSP PAGE OF THIS PROJECT
+</h3>
+
+</header>
+
+<div style="background-color: aqua;">
+<footer>
+<div>
+<%
+out.print("TODAY'S DATE : ");
+LocalDate lc = LocalDate.now();
+out.print(lc);
+%>
+</div>
+</footer>
+</div>
+</body>
+</html>
+
+
+//ass10b.txt
+
+THIS IS A TEXT FILE 2 
+FOR THE SECOND JSP PAGE
+
+
+//styles.css
+
+@charset "ISO-8859-1";
+
+header h3
+{
+	background-color: #ff00ff;
+}
+footer div
+{
+	color: red;
+       text-align: center;
+}
+
+=====================================================================================================================================
+11 Make a form which accepts name and date of birth of a person and stores it in the database.Use date type to take date of birth.
+
+=>
+
+//ass11.html
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<form action="serv2">
+<fieldset>
+<legend>DETAILS</legend>
+FULLNAME<input type="text" name="fn">
+DOB<input type="date" name="da">
+<input type="submit" value="Enter">
+</fieldset>
+</form>
+</body>
+</html>
+
+
+//serv2.java
+
+package PROJECTS;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class serv2 extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+    
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	response.setContentType("text/html");
+	String fnm = request.getParameter("fn");
+	
+	Date der = null;
+	
+	String d = request.getParameter("da");
+	
+	SimpleDateFormat ft1 = new SimpleDateFormat("yyyy-MM-dd");
+
+	PrintWriter pw = response.getWriter();
+	
+	try {
+		
+		der = ft1.parse(d);
+		
+		String str = ft1.format(der);
+		
+		pw.print(str);
+		
+		Class.forName("oracle.jdbc.driver.OracleDriver");
+		
+		Connection cn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","system","root");
+		
+		Statement st = cn.createStatement();
+		
+		String query ="insert into detail values('"+fnm+"',date'"+d+"')";
+		
+		st.executeUpdate(query);
+		
+		pw.print("<br>INSERTED SUCCSSFULLY INTO THE TABLE........");
+	}
+    catch(Exception ea)
+    {
+    	ea.printStackTrace();
+    }
+	
+}
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}
+
+
+===================================================================================================================================================================================
+12 Create 3 input text boxes and a submit button. Apply the background color for all text boxes as pink using class selector and change the font color of the submit button using the id selector.
+
+=>
+
+//ass12.html
+
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="style2.css">  
+</head>
+<body>
+<form class="c1">
+NAME <input type="text">
+NUMBER<input type="number">
+EMAIL<input type="email">
+<input type="submit" id="s1">
+</form>
+</body>
+</html>
+
+//Style.css
+
+.c1
+{
+    background-color: pink;
+}
+#s1
+{
+    color: red;
+}
+===========================================================================
+13 Create a group selector to set the padding (25px) of a division and a paragraph text.
+
+=>
+
+//ass13.html
+
+<html>
+<head>
+<style>
+    div,p
+    {
+        padding: 25px;
+    }
+    
+</style>        
+</head>
+<body>
+
+    
+<div> THIS IS DIVISION SECTION</div>
+    
+<p style="text-indent: 150px ;text-align: justify; text-decoration:none;text-transform: capitalize;letter-spacing: 2px; word-spacing: 2px">THIS IS A PARAGRAPH, A WONDERFUL ONE HAND PICKED FROM, THE MOST READ NOVELS OF THE CENTURY AND I HOPE EVERYBODY LIKES IT UNLESS AND UNTIL THERES SOMEONE WHO TRUELY HATES SHEER TALENT WHO CAN ACTUALLY BRING ABOUT CHANGES WITHIN PEOPLE AND THE FUTURE GENERATIONS TO COME</p>    
+    
+</body>
+</html>
+
+
+===========================================================================
+14 Create a division and set the left & top margin to 20px and 30px and also set the background color to green and padding to 50px.
+
+=>
+
+//ass14.html
+<html>
+<head>
+<style>
+  div
+    {
+      margin: 50px 20px;  
+      background-color: green;
+      padding: 50px;
+    }
+</style>
+</head>
+<body>
+   
+ <div>A best friend gives us a sense of comfort so paramount that we tend to seek and turn to them first, often over our own families. One study explains individuals, particularly teens, cope with stress better when they’re around peers. Friends become an important source of encouragement and they can simply take their mind off worries.</div>
+    
+
+</body>
+</html>
+
+===========================================================================
+15 Make a table with collapse border and color of border is Blue and alignment of text should be bottom right. Background color of the heading should be pink . Font size of text written inside table body is 20px.
+
+=>
+
+//ass15.html
+
+<html>
+<head>
+<style>
+table
+    {
+        border-collapse: collapse;
+        border-color: blue;
+        vertical-align: bottom;
+        text-align: right;
+        font-size: 20px;
+    }
+th
+    {
+        background-color: pink;
+    }
+
+</style>
+</head>
+<body>
+<table border="5">
+<tr>
+    <th>FIRST</th>
+    <th>SECOND</th>
+    <th>THIRD</th>
+    </tr>    
+<tr>
+    <td>NAME1</td>
+    <td>NAME2</td>
+    <td>NAME3</td>
+    </tr>   
+</table>
+</body>
+</html>
+
+==========================================================================
+16 Take three integer variables in Javascript.Assign values to first two variables. Print the Sum in the Heading tag and console window.
+
+=>
+
+<html>
+<head>
+</head>
+<body>
+
+    <H2>SUM IS </H2>
+    <h2 id="id1">value</h2>
+<script>
+
+    var num1;
+    num1 = 20;
+    var num2;
+    num2 = 35;
+    var num3;
+   
+    num3 = num1 + num2;
+    
+    console.log("SUM IS "+num3);
+     document.getElementById("id1").innerHTML=num3;
+</script>   
+</body>
+</html>
+
+
+===========================================================================
+
+
+
+
+
+
+
+17 Assign firstname & lastname and print the full name in the alert box.
+
+=>
+
+
+<html>
+<head>
+    
+</head>
+<body>
+<script>
+   var frstnm = "ABHISHEK";
+   var lastnm = "PILLAI";
+    
+   var fullnm = frstnm + lastnm;
+   alert(fullnm);
+    
+</script>
+</body>
+</html>
+
+===================================================================================================================================================================================================================================================
+18 Display the image with the border 5px , Brown color and image should be displayed in the right of the page along with the Paragraph .Set the image width and heigth
+   to 150px and 150px.
+
+=>
+
+<html>
+<head>
+<style>
+    img
+    {
+    border-width: 5px;
+    border-color: brown;
+    float: right;
+    width: 150px;
+    height: 150px;
+    }
+</style>
+</head>
+<body>    
+    <p>A best friend gives us a sense of comfort so paramount that we tend to seek and turn to them first, often over our own families. One study explains individuals, particularly teens, cope with stress better when they’re around peers. Friends become an important source of encouragement and they can simply take their mind off worries.</p>
+    
+    <img src="px.jpeg">
+    
+    <p>A best friend gives us a sense of comfort so paramount that we tend to seek and turn to them first, often over our own families. One study explains individuals, particularly teens, cope with stress better when they’re around peers. Friends become an important source of encouragement and they can simply take their mind off worries.</p>
+</body>
+</html>
+===================================================================================================================================================================================================================================================
