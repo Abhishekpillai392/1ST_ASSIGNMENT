@@ -1309,7 +1309,7 @@ document.getElementById("id3").innerHTML=city;
 </body>
 </html>
 
-
+===========================================================================================================================================================================
 30 Create a confirm box on giving some message.If User clicks Ok button , then background color of the body should be green, If user clicks on cancel button then 
     background color should be red.
 
@@ -1350,6 +1350,7 @@ document.getElementById("id3").innerHTML=city;
 </body>
 </html>
 
+===============================================================================================================================================================
 31 Make a form in Javascript where 2 text boxes accept numbers. Create 4 buttons ADD,SUB,MUL,DIV. When clicked on a button display the Answer in Heading tag.
 
 
@@ -1429,7 +1430,7 @@ document.getElementById("id3").innerHTML=city;
 </body>
 </html>
 
-===========================================================================
+============================================================================================================================================================
 32 Create a Registration form where name,age,city(select box),email and a submit button. Form should not be submitted if age is less than 18.
 
 
@@ -1527,10 +1528,87 @@ document.getElementById("id3").innerHTML=city;
 </body>
 </html>
 
-===========================================================================
+=========================================================================================================================================================================
 33 Create a form to accept password and username .3 text boxes for Username, Password and Retype Password. If Both passwords are matched then only form should be 
    submitted and display the username in the servlet.
-=====================================================================
+
+
+=>
+
+
+//ass33.html
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<form action="ass_ser33">
+USERNAME <input type="text" name="nm">
+PASSWORD <input type="password" name="pass">
+RETYPE-PASSWORD <input type="password" name="pas">
+<input type="submit" value="Go">
+</form>
+</body>
+</html>
+
+//servlet - 33
+
+package PROJECTS;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class ass_ser33 extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+    
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	PrintWriter pw = response.getWriter();
+	
+	String us = request.getParameter("nm");
+	
+	String pa = request.getParameter("pass");
+	
+	String p  = request.getParameter("pas");
+	
+	if(us.equals("abhi123"))
+	{
+		if(pa.contentEquals("passabhi"))
+		{
+			if(pa.contentEquals(p))
+			{
+				pw.print("WELCOME "+us);
+			}
+			else
+			{
+				pw.print("PASSWORD DOESNT MATCH,PLEASE RETYPE IT");
+			}
+		}
+		else
+		{
+			pw.print("PASSWORD IS INCORRECT");
+		}	
+	}
+	else
+	{
+		pw.print("USERNAME IS INVALID");
+	}	
+}
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
+	}
+
+}
+
+
+====================================================================================================================================================
 34 Create a JSON data which contains book information for three books. Access all the details of every book like bookid,booktitle,bookprice.
 
 
@@ -1577,7 +1655,7 @@ document.getElementById("id3").innerHTML=city;
 </body>
 </html>
 
-===========================================================================
+==============================================================================================================================================
 35 Create a Javascript object which has a property as StudentName,StudentSkills (Array) . Convert this object to JSON.
    
 =>
@@ -1608,5 +1686,765 @@ document.getElementById("id3").innerHTML=city;
 </script>
 </body>
 </html>
+=====================================================================================================================================================
+36 Create 3 buttons named as Red, Green, Blue. When clicked on any button the page background should be changed according to the button.
+
+
+=>
+
+
+//ass36.html
+
+<html>
+<head>
+         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <script>
+    $(document).ready(function(){
+        $("button.b1").click(function(){
+           $("body").css("backgroundColor","red");
+        });
+        
+        $("button.b2").click(function(){
+           $("body").css("backgroundColor","green");
+        });
+        
+        $("button.b3").click(function(){
+           $("body").css("backgroundColor","blue");
+        });
+        
+    })
+    
+    </script>
+    
+    <button class="b1">RED</button>
+    <button class="b2">GREEN</button>
+    <button class="b3">BLUE</button>
+</body>
+</html>
+
+=========================================================================================================================================
+37 Create two buttons Change the font color of the first element of 2 unordered list according to button.
+
+
+=>
+
+//ass37.html
+
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+</head>
+<body>
+    <script>
+    
+        $(document).ready(function(){
+            $("button.b1").click(function(){
+                $("ul li:first-child").css({color:"crimson",backgroundColor:"black",listStyle:"none"});
+            });
+        });
+        
+        $(document).ready(function(){
+            $("button.b2").click(function(){
+                $("ul li:first-child").css({color:"greenyellow",backgroundColor:"black",listStyle:"none"});
+            });
+        });
+        
+    </script>
+</body>
+    
+    <button class="b1">BUTTON 1</button>
+    <button class="b2">BUTTON 2</button>
+
+    <ul>
+    <li>LIST1_CH1</li>
+    <li>LIST1_CH2</li>
+    <li>LIST1_CH3</li>
+    <li>LIST1_CH4</li>
+    </ul>
+    
+     <ul>
+    <li>LIST2_CH1</li>
+    <li>LIST2_CH2</li>
+    <li>LIST2_CH3</li>
+    <li>LIST2_CH4</li>
+    </ul>
+    
+</html>
+
+
+==============================================================================================================================================================
+38 Display numbers from 1 and 10 sequencially. All Odd numbers should be printed in Red color and Even numbers should be displayed in Green Color.
+
+
+=>
+
+//ass38.html
+
+
+<html>
+<head>
+<style>
+    #s1
+    {
+    color: green;
+    }
+    
+    #s2
+    {
+    color: red;
+    }
+</style>   
+</head>
+<body>
+   <script>
+   for(var i=1;i<=10;i++)
+       {
+         document.write("<table border='2'");
+         
+         if(i%2==0)
+             {
+         document.write("<tr id='s1'><td>"+i+"</td></tr>");  
+             }
+         else
+               {
+         document.write("<tr id='s2'><td>"+i+"</td></tr>");  
+               } 
+         document.write("</table>");
+       }
+    
+   </script> 
+    <table style="border-style: solid"></table>
+</body>
+</html>
+
+
+OR
+<html>
+<head>  
+</head>
+<body>
+   <script>
+   for(var i=1;i<=10;i++)
+       {
+         document.write("<table border='2'");
+         
+         if(i%2==0)
+             {
+         document.write("<tr><td style=color:green>"+i+"</td></tr>");  
+             }
+         else
+               {
+         document.write("<tr><td style=color:red>"+i+"</td></tr>");  
+               } 
+         document.write("</table>");
+       }
+    
+   </script> 
+    <table style="border-style: solid"></table>
+</body>
+</html>
+
+===============================================================================================================================================================================
+
+39 Create an image on the web page width : 150px, height : 150px. Make a button where write a JQuery code to increse the width and height of image on Clicking the button 
+   and border width should be changed to 15px and color will be Red.
+
+
+=>
+
+
+//ass39.html
+
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<style>
+    img
+    {
+       border-style: solid;
+       border-width: 5px;
+       border-color: red;  
+    }
+</style>
+</head>
+<body>
+    <img src="px.jpeg" style="width: 150px;height: 150px">
+    
+    <script>
+    $(document).ready(function(){
+        $("button#b1").click(function(){
+            $("img").animate({
+                width:"+=100px",
+                height:"+=100px",
+                borderStyle:"solid",
+                borderWidth:"15px",
+                borderColor:"red",
+            });
+        });
+    })
+    
+    </script>
+    
+    <button id="b1">CLICK HERE</button>
+</body>
+</html>
+==========================================================================
+40 Make a paragraph and a button . When clicked on the button then paragraph color should be changed to red and then font size of the paragraph should be changed.
+
+=>
+
+
+//ass40.html
+
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+<script>
+    $(document).ready(function(){
+        $("button.b1").click(function(){
+            $("p#p1").css({backgroundColor:"crimson",color:"yellow",fontSize: 20});
+        });
+    });    
+    
+</script>
+    <button class="b1">CLICK</button>
+    
+    <p id="p1">Paragraphs are distinct blocks of text which section out a larger piece of writing—stories, novels, articles, creative writing or professional writing pieces—making it easier to read and understand. Good paragraphs are a handy writing skill for many forms of literature, and good writers can greatly enhance the readability of their news, essays, or fiction writing when constructed properly.</p>
+</body>
+</html>
+===========================================================================
+41 Create a Login Form where Username and Password is to be taken in the textbox. The Login form should be hidden When click on the button and also should be displayed 
+   when clicked again.
+
+
+=>
+
+//ass41.html
+<html>
+<body>
+
+<input type="button" onclick="fun()" value="LOGIN">
+<div id="i1">fenn</div>
+<h2 id="i2"> </h2>
+    
+    <script>
+     var temp=true;
+    
+    function fun()
+        { 
+            
+            var entry="<form>USERNAME<input type=text>PASSWORD<input type=text></form>";
+
+            if(temp)
+                {
+                    document.getElementById("i1").innerHTML=entry;
+                    temp=false;
+                }
+            else
+            {
+               document.getElementById("i1").innerHTML="";
+               temp=true;
+            }
+            
+            document.getElementById("i2").innerHTML=temp;
+        }
+    </script>
+</body>
+</html> 
+
+
+===========================================================================
+
+42 create div tag with predefined parameters : width :300px, height:300px. When move the mouse over the division then height and width should be increased.
+
+=>
+
+//ass42.html
+
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<style>
+
+    div
+    {
+       width: 300px;
+       height: 300px;
+       background-color: red;
+    }
+</style>    
+</head>
+<body>
+    <div> </div>
+    
+    <script>
+    $(document).ready(function(){
+        
+        $("div").on({mouseenter:function(){
+            $(this).css({height :"400px",
+                         width :"400px",
+                        backgroundColor :"green"});
+        },
+                     mouseleave:function(){
+            $(this).css({height :"300px",
+                        width :"300px",
+                        backgroundColor:"red"});          
+                     }
+        });
+    })
+    </script>
+</body>
+</html>
+
+
+===========================================================================
+43 Create two paragraphs p1 and p2. When clicked on the first paragraph the second paragraph should be given the effect of slidingup and sliding down.
+   
+=>
+
+//ass43.html
+
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+</head>
+<body>
+<p id="p1">Paragraphs are distinct blocks of text which section out a larger piece of writing—stories, novels, articles, creative writing or professional writing pieces—making it easier to read and understand. Good paragraphs are a handy writing skill for many forms of literature, and good writers can greatly enhance the readability of their news, essays, or fiction writing when constructed properly.</p>
+
+<p id="p2">Paragraphs are distinct blocks of text which section out a larger piece of writing—stories, novels, articles, creative writing or professional writing pieces—making it easier to read and understand. Good paragraphs are a handy writing skill for many forms of literature, and good writers can greatly enhance the readability of their news, essays, or fiction writing when constructed properly.</p>
+    
+    <script>
+    $(document).ready(function(){
+        $("p#p1").click(function(){
+            $("p#p2").slideToggle(1000);
+        });
+</body>
+</html>
+
+=======================================================================
+44 Create an Anonymous function in Typescript where function take firstname & lastname as parameters and returns the full name. Display fullname.
+
+=>
+
+//ass44.html
+
+var nam = function(x:string,y:string):string
+{
+    return x+y;
+}
+
+console.log(nam("ABHISHEK"," PILLAI"));
+===========================================================================
+45 Create an arrow function in typescript which accepts a number as a parameter and returns the square of a number.
+
+=>
+
+//ass45.ts
+
+var arr = (n:number):number=> n*n*n;
+
+console.log(arr(2));
+
+===========================================================================
+46 Make an anonymous function which accepts a number and calculates the factorial of the number and print it.
+
+=>
+
+//ass46.ts
+
+var anon = function(num:number)
+{
+    var res = 1;
+
+    for(var i=1;i<=num;i++)
+    {
+        res *= i;
+    }
+    console.log(res);
+}
+
+anon(4);
+
+===========================================================================
+47 Make a function which accepts two arguments as first name and last name, If lastname is not passed then default lastname should be displayed with firstname.
+
+=>
+
+//ass47.ts
+
+function func(ft:string,lt?:string,ls="PILLAI")
+{
+    if(lt!=null)
+    {
+      console.log(ft+" "+lt);
+    }
+    else
+    {
+        console.log(ft+" "+ls);
+    }
+}
+
+func("ABHISHEK","SHARMA");
+
+===========================================================================
+48 Make a function with optional parameter. This function accepts only one parameter.
+
+=>
+
+//ass48.ts
+
+function func1(n?:string):string
+{
+    return n;
+}
+
+console.log(func1("WELCOME"));
+
+==========================================================================
+49 Create a class Box. Create 3 properties as length,breadth and height of the box. Create a function which calculates the the volume of the box . A function display()
+   will display the volume along with the property values.
+
+=>
+
+//ass49.ts
+
+class box
+{
+    length : number;
+    breadth : number;
+    height : number;
+    volume  : number;
+
+    constructor(l:number,b:number,h:number)
+    {
+        this.length = l;
+        this.breadth = b;
+        this.height = h;
+        this.volume = l*b*h;
+    }
+
+    display()
+    {
+        console.log("IF THE LENGTH, BREADTH, AND HEIGHT IS : "+this.length+" "+this.breadth+" "+this.height);
+        console.log("THEN VOLUME IS : "+this.volume);
+    }
+}
+
+var b1 = new box(10,20,30);
+b1.display();
+
+===========================================================================
+50 Create an Array of 5 integers and display the average using for..in loop.
+
+=>
+
+//ass50.ts
+
+var aray : number[];
+aray = [15,25,35,45,55];
+
+var sum = 0;
+
+for(var t in aray)
+{
+    sum+=aray[t];
+}
+
+var avg = sum / aray.length;
+console.log("AVERAGE OF 5 INTEGER VALUES ARE : "+avg);
+
+======================================================================================
+51 Create a tuple which has a string , number and boolean as a first ,second and third value. Display the array elements.
+
+
+=>
+
+//ass51.ts
+
+let tup :[string,number,boolean];
+
+tup = ["STRING",34,true];
+
+for(var ten of tup)
+{
+    console.log(ten);
+}
+
+========================================================================================
+52 Create two textboxes as name and age of a person in a component as a child of Root component.Create a button as submit. Once clicked on this button , some handler
+    should be called which will display the name and age in the alert box.
+
+=>
+
+
+//head52.component.ts
+
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-head52',
+  templateUrl: './head52.component.html',
+  styleUrls: ['./head52.component.css']
+})
+export class Head52Component implements OnInit {
+
+  constructor() { }
+
+  ngOnInit(): void {
+  }
+
+  name:string;
+  age:number;
+
+  getdetails()
+  {
+    alert("NAME : "+this.name+" "+"AGE : "+this.age);
+  }
+}
+
+//head52.component.html
+
+<h1>ASSIGNMENT : 52</h1>
+<br>
+<hr>
+
+NAME : <input [(ngModel)]="name"><br>
+AGE :<input [(ngModel)]="age"><br>
+<button (click)="getdetails()">SUBMIT</button>
+
+//app.component.html
+
+<h1>ASSIGN : 52</h1>
+<hr>
+<app-head52> </app-head52>
+<br><br>
+<hr>
+
+========================================================================================
+53 Create two components A and B which are the child of Root. Component A shows the text box with a button. Component B displays an unordered list of item.
+
+=>
+
+//a.component.ts
+
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-a',
+  templateUrl: './a.component.html',
+  styleUrls: ['./a.component.css']
+})
+export class AComponent implements OnInit {
+
+  constructor() { }
+
+  ngOnInit(): void {
+  }
+    
+    textin:string;
+
+    getdet()
+    {
+      alert(this.textin);
+    }
+}
+
+//a.component.html
+
+<p>A : COMPONENT</p>
+<input [(ngModel)]="textin"><br>
+<button (click)="getdet()">CLICK HERE</button>;
+
+//b.component.html
+
+<p>B : COMPONENT</p>
+<ul style="list-style-type: symbols();">
+<li>FIRST</li>
+<li>SECOND</li>
+<li>THIRD</li>
+<li>FOURTH</li>
+</ul><hr>
+
+//app.component.html
+
+<h1>ROOT COMPONENT</h1>
+<hr>>
+<app-a></app-a>
+<br><hr>
+<app-b></app-b>
+
+=======================================================================================
+
+54 Create a Component which has 3 variables as rollno, name and Pass/Fail status(boolean). Assign  default values to these variables and print the values in the view
+    as a table format.
+
+
+ =>
+//head54.component.ts
+
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-head54',
+  templateUrl: './head54.component.html',
+  styleUrls: ['./head54.component.css']
+})
+export class Head54Component implements OnInit {
+
+  constructor() { }
+
+  ngOnInit(): void {
+  }
+
+  rollno:number=23;
+  name:string="ABHISHEK";
+  pass:boolean=true;
+}
+
+//head54.component.html
+
+<h2>ASSIGN : 54</h2>
+
+<br><hr>
+<table border= 2>
+<tr><th>NAME</th><th>ROLLNO</th><th>PASS</th></tr>
+<tr><td>{{name}}</td><td>{{rollno}}</td><td>{{pass}}</td></tr>
+</table>
+<br><br>
+
+
+//app.component.html
+
+<h2>ROOT COMPONENT</h2>
+<br><hr>
+<app-head54></app-head54>
+<br><hr>
+
+====================================================================================
+
+55 Accept two nos in a component from the text box. Make single button "Calculate". When button is pressed then Addition,Subtraction,Multiplication and division
+   should be displayed in the view.
+
+=>
+
+//head55.component.ts
+
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-head55b',
+  templateUrl: './head55b.component.html',
+  styleUrls: ['./head55b.component.css']
+})
+export class Head55bComponent implements OnInit {
+
+  constructor() { }
+
+  ngOnInit(): void {
+  }
+  num1:number;
+  num2:number;
+
+  add:number;
+  sub:number;
+  pro:number;
+  div:number;
+
+  getcal()
+  {
+    this.add= Number(this.num1)+Number(this.num2);
+    this.sub= this.num1-this.num2;
+    this.pro= this.num1*this.num2;
+    this.div= this.num1/this.num2;
+  }
+}
+
+
+//head55.component.html
+
+<h2>ASSIGNMENT : 55</h2>
+
+<input [(ngModel)]="num1"><br>
+<input [(ngModel)]="num2"><br>
+<button (click)="getcal()">CALCULATE</button>
+<h2>{{add}}</h2>
+<h2>{{sub}}</h2>
+<h2>{{pro}}</h2>
+<h2>{{div}}</h2>
+<hr>
+//app.component.html
+
+<h2>ROOT COMPONENT</h2><hr>
+<app-head55></app-head55>
+<br>
+<hr>
+
+
+
+
+===================================================================================
+56 Create a textbox and a button in the component. Enter any string . If the string length is more than 5 characters Then a message should be displayed on the view
+    as "String is valid"
    
 
+=>
+
+//head56.component.ts
+
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-head56',
+  templateUrl: './head56.component.html',
+  styleUrls: ['./head56.component.css']
+})
+export class Head56Component implements OnInit {
+
+  constructor() { }
+
+  ngOnInit(): void {
+  }
+
+  str:string;
+  str2:string;
+
+  checkleng()
+  {
+    var st = this.str;
+    if(st.length > 5)
+    {
+      // document.write("STRING IS VALID");
+      this.str2="STRING IS VALID";
+    }
+    else
+    {
+      this.str2=" ";
+    }
+  }
+
+}
+
+
+//head56.component.html
+
+<h2>ASSIGNMENT : 56</h2>
+
+<input [(ngModel)]="str"><br>
+<button (click)="checkleng()">CHECK</button>
+<h2>{{str2}}</h2>
+
+//app.component.html
+
+<h2>ROOT COMPONENT</h2>
+<br><hr>
+<app-head56></app-head56>
+<br><hr>
+
+===============================================================================
