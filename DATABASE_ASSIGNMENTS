@@ -1,3 +1,5 @@
+/*5]*/
+
 create table column1(cid number(4),cname varchar2(15),city varchar2(10));
 create table column2(cname varchar2(15),city varchar2(10));
 
@@ -11,6 +13,7 @@ insert into column2(cname,city) select cname,city from column1;
 select * from column2;
 
 /*==============================================================================*/
+/*6]*/
 
 create table product4(pid number(4),pname varchar2(15),pqty number(4),pcost number(5));
 
@@ -31,6 +34,7 @@ select * from product4 where pcost > 8000;
 select * from product4 where pid = 13 or pcost = 1000;
 
 /*===================================================================*/
+/*7]*/
 
 create table cus(name varchar2(15),dob date,city varchar2(10));
 
@@ -44,6 +48,7 @@ select * from dual;
 select * from cus;
 
 /*=====================================================================*/
+/*8]*/
 
 create table emp3(ename varchar2(15),salary number(5));
 
@@ -59,7 +64,7 @@ select * from emp3;
 select * from emp3 ORDER BY salary DESC;
 
 /*====================================================*/
-
+/*9]*/
 update emp3 set salary = 20000 where salary > 30000;
 
 select * from emp3 ORDER BY salary DESC;
@@ -643,5 +648,18 @@ SELECT * FROM IDCARD;
 DROP TABLE IDCARD;
 COMMIT;
 
-=========================================================================================
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Q.36 Create a table Movie which contains the movie name,release year,rating (1-5). Create a Statement level trigger which is executed after insertion of records.
+     Create a Row level trigger on this table which is executed before updating the movie name when movie rating is greater than 0.
+  Ans:
 
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Q.37 Create a cursor on the Movie table which displays only those records where Movie rating is more than 3.
+ Ans:
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Q.38 Create an Associative Array which maintains the population citywise.
+ Ans:
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
