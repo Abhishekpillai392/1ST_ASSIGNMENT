@@ -1,3 +1,40 @@
+Q.1 Create a table Result which stores the records of 5 students where the fields as 
+    rollno, name, percentage.
+    
+create table demo(rollno number(2),name char(10),percent number(3));
+
+insert into demo(rollno,name,percent) VALUES(10,'AVINASH',67);
+insert into demo(rollno,name,percent) VALUES(11,'KAILASH',71);
+insert into demo(rollno,name,percent) VALUES(12,'BHUSHAN',56);
+insert into demo(rollno,name,percent) VALUES(13,'LOKESH',92);
+insert into demo(rollno,name,percent) VALUES(15,'DHANUSH',79);
+
+select * from demo;
+
+===========================================================================================================
+Q.2 Add a column in the Result table named as Grade.
+
+alter table demo add grade varchar2(3); 
+
+=============================================================================================================
+Q.3 Create a table marks which stores the marks of 5 subjects(physics,chemistry,maths,computer,english) and display the percentage. Store record of 5 students.
+
+create table perc(NAME varchar2(10),PHYSICS number,CHEMISTRY number,MATHS number,COMPUTER number,ENGLISH number,PERCENTAGE as(((PHYSICS+CHEMISTRY+MATHS+COMPUTER+ENGLISH)*100)/500));
+
+insert into perc(NAME,PHYSICS,CHEMISTRY,MATHS,COMPUTER,ENGLISH) values('AJAY',45,56,67,78,89);
+insert into perc(NAME,PHYSICS,CHEMISTRY,MATHS,COMPUTER,ENGLISH) values('ABHI',46,51,77,88,89);
+insert into perc(NAME,PHYSICS,CHEMISTRY,MATHS,COMPUTER,ENGLISH) values('AVINASH',59,63,64,72,65);
+insert into perc(NAME,PHYSICS,CHEMISTRY,MATHS,COMPUTER,ENGLISH) values('ABHIJEET',35,37,47,38,56);
+insert into perc(NAME,PHYSICS,CHEMISTRY,MATHS,COMPUTER,ENGLISH) values('ABHINAV',75,66,77,88,89);
+
+select *from perc;
+
+=============================================================================================================================
+Q.4 Rename the table Result with StudentScore.
+
+alter table perc rename to Student_score;
+
+select * from Student_score;
 /*5]*/
 
 create table column1(cid number(4),cname varchar2(15),city varchar2(10));
