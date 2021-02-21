@@ -1,6 +1,6 @@
 Q.1 Create a table Result which stores the records of 5 students where the fields as 
     rollno, name, percentage.
-    
+=> 
 create table demo(rollno number(2),name char(10),percent number(3));
 
 insert into demo(rollno,name,percent) VALUES(10,'AVINASH',67);
@@ -13,9 +13,9 @@ select * from demo;
 
 ===========================================================================================================
 Q.2 Add a column in the Result table named as Grade.
+=>
 
-alter table demo add grade varchar2(3); 
-
+alter table Result add Grade varchar2(2);
 =============================================================================================================
 Q.3 Create a table marks which stores the marks of 5 subjects(physics,chemistry,maths,computer,english) and display the percentage. Store record of 5 students.
 
@@ -31,12 +31,14 @@ select *from perc;
 
 =============================================================================================================================
 Q.4 Rename the table Result with StudentScore.
-
+=>
 alter table perc rename to Student_score;
 
 select * from Student_score;
-/*5]*/
 
+========================================================================================================================
+/*5]*/
+=>
 create table column1(cid number(4),cname varchar2(15),city varchar2(10));
 create table column2(cname varchar2(15),city varchar2(10));
 
