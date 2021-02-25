@@ -1,6 +1,7 @@
+
 Q.1 Create a table Result which stores the records of 5 students where the fields as 
     rollno, name, percentage.
-=> 
+    
 create table demo(rollno number(2),name char(10),percent number(3));
 
 insert into demo(rollno,name,percent) VALUES(10,'AVINASH',67);
@@ -13,9 +14,9 @@ select * from demo;
 
 ===========================================================================================================
 Q.2 Add a column in the Result table named as Grade.
-=>
 
-alter table Result add Grade varchar2(2);
+alter table demo add grade varchar2(3); 
+
 =============================================================================================================
 Q.3 Create a table marks which stores the marks of 5 subjects(physics,chemistry,maths,computer,english) and display the percentage. Store record of 5 students.
 
@@ -31,14 +32,29 @@ select *from perc;
 
 =============================================================================================================================
 Q.4 Rename the table Result with StudentScore.
-=>
+
 alter table perc rename to Student_score;
 
 select * from Student_score;
+=============================================================================================================================
+Q.5 Create two tables A and B where A has 3 columns and B has 2 columns , Copy last two columns from table A to Table B.
 
-========================================================================================================================
+create table column1(cid number(4),cname varchar2(15),city varchar2(10));
+create table column2(cname varchar2(15),city varchar2(10));
+
+insert into column1 values(101,'AVINASH','PUNE');
+insert into column1 values(102,'DINESH','PATNA');
+insert into column1 values(103,'JEEVAN','SOLAPUR');
+insert into column1 values(104,'KAILASH','NAGPUR');
+
+insert into column2(cname,city) select cname,city from column1;
+
+select * from column2;
+
+=============================================================================================================================
+
 /*5]*/
-=>
+
 create table column1(cid number(4),cname varchar2(15),city varchar2(10));
 create table column2(cname varchar2(15),city varchar2(10));
 
@@ -691,14 +707,84 @@ COMMIT;
 Q.36 Create a table Movie which contains the movie name,release year,rating (1-5). Create a Statement level trigger which is executed after insertion of records.
      Create a Row level trigger on this table which is executed before updating the movie name when movie rating is greater than 0.
   Ans:
+create table MOVIEs(mname varchar2(40),relyr number(4),rating number(2));
+drop table MOVIES;
+create or replace TRIGGER trg_MOVIEs
+AFTER INSERT on MOVIEs
+DECLARE
+BEGIN
+dbms_output.put_line('RECORD IS BEEN INSERTED IN THE TABLE');
+END;
 
+insert into movies values('FAULT IN OURS STARS', 2014, 4.5);
+insert into movies values('FIVE FEET APART', 2019, 4.7);
+
+CREATE OR REPLACE TRIGGER trg_upd_MOVIEs
+BEFORE UPDATE ON MOVIEs
+FOR EACH ROW
+WHEN (NEW.rating>0)
+DECLARE
+BEGIN
+       DBMS_OUTPUT.PUT_LINE('Old NAME : '|| :OLD.mname);
+       DBMS_OUTPUT.PUT_LINE('New NAME : '|| :NEW.mname);
+END; 
+
+update MOVIEs set mname = 'NEW' where relyr = 2019; 
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Q.37 Create a cursor on the Movie table which displays only those records where Movie rating is more than 3.
  Ans:
 
+SET SERVEROUTPUT ON
+DECLARE
+
+nm MOVIEs.mname%type;
+r MOVIEs.relyr%type;
+rat MOVIEs.rating%type;
+
+CURSOR cur_mov IS SELECT mname,relyr,rating from MOVIEs where rating > 3;
+
+BEGIN
+
+OPEN cur_mov;
+
+LOOP
+
+FETCH cur_mov into nm,r,rat;
+EXIT WHEN cur_mov%notfound;
+dbms_output.put_line('MOVIE NAME==>'|| nm || 'RELEASE YEAR==>'|| r || 'RATING==>' || rat);
+
+END LOOP;
+CLOSE cur_mov;
+
+END;
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Q.38 Create an Associative Array which maintains the population citywise.
  Ans:
+
+declare
+
+TYPE pop is TABLE of number(20) INDEX BY varchar2(30);
+population pop;
+city varchar2(30);
+
+BEGIN
+
+population('PUNE') := 1100000;
+population('MUMBAI') := 30000000;
+population('SOLAPUR') := 4300000;
+population('NAGPUR') := 11410000;
+population('CHATTISGARH') := 1200650;
+
+city := population.first;
+--dbms_output.put_line(city);
+--dbms_output.put_line(population(city));
+
+WHILE city is NOT NULL LOOP 
+dbms_output.put_line(city || '=======>' || population(city));
+city := population.next(city);
+END LOOP;
+END;
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
