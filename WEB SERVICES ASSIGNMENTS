@@ -1,0 +1,583 @@
+Q.1. Create a Web service where a method is returning the sum of digits of a number. Print Sum on the web Page .
+
+=>
+
+package org.pack;
+
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
+@Path("/ass1")
+public class ass1 {
+	
+	@Path("/method")
+	@GET
+	@Produces(MediaType.TEXT_PLAIN)
+	public String getsum()
+	{
+		
+		int sum = 0;
+		int rem = 0;
+		int num = 4765765;
+		
+		while(num!=0)
+		{
+		rem = num % 10;
+		sum = sum + rem;
+		num = num / 10;
+		}
+		
+		String str=String.valueOf(sum);
+		return str;
+	}
+}
+
+===================================================================================
+Q.2. Create a Web Service where inside a method accept fisrtname and lastname from user and display the fullname on the web page.
+
+
+=>
+
+package org.pack;
+
+import java.util.Scanner;
+
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+
+@Path("/ass2")
+public class ass2 {
+
+	@Path("/getnm")
+    @GET
+    @Produces("text/plain")
+	public String getnm()
+	{
+		Scanner sc = new Scanner(System.in);
+		System.out.println("ENTER FIRSTNAME : ");
+		String fn = sc.nextLine();
+		
+		System.out.println("ENTER LASTNAME : ");
+		String ln = sc.nextLine();
+		
+		return fn+" "+ln;
+	}
+===================================================================================
+3. Create a Class as Customers. Cid, cname and qty are the members of this class. Create a resource which saves records of 5 products. Make a method which displays
+   all records in the tabular form. Make a method which displays all records in XML form. Make a method which displays the record on the basis of quantity.
+
+=>
+
+package demo.WEBSERVICES3;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
+@Path("/ass3")
+public class assign3 {
+
+	customers c1 = new customers(101,"LAKHAN",4);
+	customers c2 = new customers(123,"SHAILESH",7);
+    customers c3 = new customers(347,"NILESH",5);
+	customers c4 = new customers(505,"SONUP",19);
+	customers c5 = new customers(417,"SURAJ",1);
+	List<customers> lis;
+	public assign3()
+	{
+		lis = new ArrayList<customers>();
+		lis.add(c1);
+		lis.add(c2);
+		lis.add(c3);
+		lis.add(c4);
+		lis.add(c5);
+	}
+	@GET
+	@Path("/tabular")
+	@Produces(MediaType.TEXT_HTML)
+	public String tab()
+	{
+		String start = "<table border=2>" +
+				"<tr><th>CID</th>"
+				+       "<th>CNAME</th>"
+				+       "<th>QTY</th></tr>";
+		String body = null;
+		String end = "</table>";
+		for(customers cus : lis)
+		{
+			if(cus.getCid() != 0)
+			{
+			String rec = "<tr><td>"+cus.getCid()+"</td>"
+						  + "<td>"+cus.getCname()+"</td>"
+						  + "<td>"+cus.getQty()+"</td></tr>";
+			body = body + rec;	
+			}
+			else
+			{
+				System.out.println("RECORD NOT FOUND");
+			}
+		}
+		
+		return start+body+end;
+	}
+	
+	@GET
+	@Path("/xmlform")
+	@Produces(MediaType.APPLICATION_XML)
+	public List<customers> xml()
+	{
+		return lis;
+	}
+
+	@GET
+	@Path("/find/{cid}")
+	@Produces(MediaType.APPLICATION_XML)
+	public customers get(@PathParam("cid")int cid)
+	{
+		int tmp = 0;
+		for(customers cus : lis)
+		{
+			if(cus.getCid() == cid)
+			{
+				tmp = 1;
+				return cus;
+			}
+		}
+		
+		if(tmp == 0)
+			return new customers(0,"NA",0);
+		
+		return new customers();
+	}
+}
+
+================================================
+4. Create a form which takes user name and age in the textbox. If age is less than 10 and greater than 20 then display a message as "Not eligible to participate" else
+print a message "Welcome username ,you are Eligible".
+
+=>
+
+package Pack;
+
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
+
+@Path("/assign4")
+public class assign4 {
+
+	@GET
+	@Path("/form4")
+	@Produces("text/html")
+	public String html()
+	{
+		return "<form action=http://localhost:8081/webresources/assign4/showmsg>"
+				+ "NAME<input type=text name=nm><br>"
+				+ "AGE<input type=number name=age><br>"
+				+ "<input type=submit value=SUBMIT>"; 
+	}
+	
+	@GET
+	@Path("/showmsg")
+	@Produces("text/html")
+	public String msg(@QueryParam("age")int age,@QueryParam("nm")String nam)
+	{
+		if(age < 10 && age > 20)
+		{
+			return "NOT ELIGIBLE TO PARTICIPATE";
+		}
+		else
+		{
+			return "WELCOME"+nam+" YOU ARE ELIGIBLE";
+		}
+	}
+}
+==============================================
+5.Create a web serrvice which takes name and salary of an employee and print name and salary on the console, Use MatrixParam annotation.
+
+=>
+
+package Pack;
+
+import javax.ws.rs.GET;
+import javax.ws.rs.MatrixParam;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+
+@Path("/assign5")
+public class assign5 {
+
+	@GET
+	@Produces("text/html")
+	@Path("/matrix")
+	public void getmsg(@MatrixParam("nm")String name,@MatrixParam("sal")int salary)
+	{
+		System.out.println("NAME   : "+name+"=>>>SALARY  : "+salary);
+	}
+}
+=================================================
+6. Make a table Login which has username and Password. Make a Login Page which accepts username & Password. If Username & password matches with the table data then
+   Print Login Successful otherwise print Invalid login.
+=>
+
+//form6.jsp
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<form action="http://localhost:8081/ASSIGNMENTS/webresources/assign6/form6" method="post">
+USERNAME <input type="text" name="us"><br>
+PASSWORD <input type="text" name="pass"><br>
+<input type="submit" value="SUBMIT">
+</form>
+</body>
+</html>
+
+//assign6.java
+
+package Pack;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+import javax.ws.rs.FormParam;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+
+import oracle.jdbc.proxy.annotation.Post;
+
+@Path("/assign6")
+public class assign6 {
+
+	@POST
+	@Path("/form6")
+	@Produces("text/html")
+	public String html(@FormParam("us")String user,@FormParam("pass")String passwd)
+	{
+		String msg = null;
+		int tmp = 0;
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			
+			Connection cn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","system","root");
+			
+			Statement smt = cn.createStatement();
+			
+			String query = "select * from login_tab";
+			
+			ResultSet rs = smt.executeQuery(query);
+			
+			while(rs.next())
+			{
+				if(rs.getString(1).equals(user) && rs.getString(2).equals(passwd))
+				{
+					tmp = 1;
+				}
+			}
+			smt.close();
+
+			cn.close();
+
+			if(tmp == 0)
+			{
+			    msg = "INVALID LOGIN !!!";
+	            return msg;
+				
+			}
+			else
+			{
+				msg = "LOGIN SUCCESSFUL !!!"
+						+ "WELCOME "+user;
+				return msg;
+			}
+	}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return "LOGIN SUCCESSFUL";
+	}
+}
+
+===============================================
+7. Write a program to perform CRUD operations in Database using Hibernate. 
+
+=>
+
+package demo.WEBSERVICES1;
+
+import java.util.List;
+
+import javax.persistence.Query;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
+@Path("/hibernate")
+public class assign7 {
+
+	
+	StringBuffer sbf = new StringBuffer("");
+	
+	@Path("insert/{id}/{nm}")
+	@POST
+	@Produces(MediaType.TEXT_PLAIN)
+	public String insertion(@PathParam("id") int eid,@PathParam("nm") String name)
+	{
+		SessionFactory sf = new Configuration().configure().addAnnotatedClass(employee.class).buildSessionFactory();
+
+		Session s = sf.openSession();
+		
+		s.beginTransaction();
+		
+		employee e = new employee();
+		e.setId(eid);
+		e.setName(name);
+		
+		s.save(e);
+		
+		s.getTransaction().commit();
+		
+		s.close();
+		
+		sf.close();
+		
+		return "RECORDS INSERTED SUCCESSFULLY";
+	}
+	
+	@Path("select")
+	@GET
+	@Produces(MediaType.TEXT_PLAIN)
+	public String selection()
+	{
+		SessionFactory sf = new Configuration().configure().addAnnotatedClass(employee.class).buildSessionFactory();
+
+		Session s = sf.openSession();
+		
+		s.beginTransaction();
+		
+		Query q = s.createQuery("from employee");
+		
+		List<employee> lis = q.getResultList();
+		
+		for(employee emp : lis)
+		{
+			sbf = sbf.append(emp.getSno()+"   "+emp.getId()+"   "+emp.getName());
+		}
+				
+		s.close();
+		
+		sf.close();
+		
+		return sbf.toString();
+	}
+	
+	@Path("update/{sno}/{id}/{nm}")
+	@PUT
+	@Produces(MediaType.TEXT_PLAIN)
+	public String updation(@PathParam("sno") int sno,@PathParam("id") int id,@PathParam("nm") String name)
+	{
+		SessionFactory sf = new Configuration().configure().addAnnotatedClass(employee.class).buildSessionFactory();
+
+		Session s = sf.openSession();
+		
+		s.beginTransaction();
+		
+		employee e = s.get(employee.class,sno);
+		e.setId(id);
+		e.setName(name);
+		
+		s.update(e);
+		
+		s.getTransaction().commit();
+		
+		s.close();
+		
+		sf.close();
+		
+		return "RECORDS UPDATED SUCCESSFULLY";
+	}
+	
+	@Path("delete/{sno}")
+	@DELETE
+	@Produces(MediaType.TEXT_PLAIN)
+	public String deletion(@PathParam("sno") int sno)
+	{
+		SessionFactory sf = new Configuration().configure().addAnnotatedClass(employee.class).buildSessionFactory();
+
+		Session s = sf.openSession();
+		
+		s.beginTransaction();
+		
+		employee e = new employee();
+	    e.setSno(sno);
+		
+		s.delete(e);
+		
+		s.getTransaction().commit();
+		
+		s.close();
+		
+		sf.close();
+		
+		return "RECORDS DELETED SUCCESSFULLY";
+	}
+	
+}
+
+=================================================
+8. Take name, gender and city of a person in the URL as a Query String. If gender is Male then a message should be displayed as " Welcome Mr. name , you are from INDIA".
+   If gender is Female then a message should be displayed as "Welcome Ms. name, you are from USA". Country name should be displayed based on the city. For example if the
+   city is Mumbai the Country is INDIA.
+   
+=>
+
+package Pack;
+
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
+
+@Path("/assign7")
+public class assign7 {
+
+	@Path("/query7")
+	@Produces("text/html")
+	@GET
+	public String get(@QueryParam("nm")String name,@QueryParam("cy")String city,@QueryParam("gen")String gender)
+	{
+		String msg = null;
+		if(gender.equalsIgnoreCase("male"))
+		{
+			if(city.equalsIgnoreCase("mumbai"))
+			{
+			msg = "WELCOME MR."+name+" ,YOU ARE FROM INDIA";
+			}
+			else if(city.equalsIgnoreCase("New York"))
+			{
+			msg = "WELCOME MR."+name+" ,YOU ARE FROM USA";
+			}
+		}
+		else if(gender.equalsIgnoreCase("female"))
+		{
+			if(city.equalsIgnoreCase("mumbai"))
+		{
+			msg = "WELCOME MISS."+name+" ,YOU ARE FROM FROM INDIA";
+		}
+		else if(city.equalsIgnoreCase("New York"))
+		{
+			msg = "WELCOME MISS."+name+" ,YOU ARE FROM FROM USA";
+		}
+		}
+		return msg;
+	}
+}
+
+==========================================================
+Q.8_2
+
+=>
+//form.jsp
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<table border=2>
+<form action="http://localhost:8081/DY_PROJ/webresources/assign82/query82" method="post">
+<tr><td>NAME</td><td><input type="text" name="nm"></td></tr>
+<tr><td>GENDER</td><td>MALE<input type="radio" name="gen"value="MALE">FEMALE<input type="radio" name="cy" value="FEMALE"></td></tr>
+<tr><td>COUNTRY</td><td>
+<select name="con">
+<option value="INDIA">INDIA</option>
+<option value="AUSTRALIA">AUSTRALIA</option>
+<option value="USA">USA</option>
+</select></td></tr>
+<tr><td><input type="submit" value="SUBMIT"></td><td><input type="reset" value="clear"></td></tr>
+</form>
+</table>
+</body>
+</html>
+
+
+//class
+
+package demo.DY_PROJ;
+
+import javax.ws.rs.FormParam;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+
+@Path("/assign82")
+public class assign82 {
+
+	@Path("/query82")
+	@Produces("text/plain")
+	@POST
+	public String get(@FormParam("nm")String name,@FormParam("con")String country,@FormParam("gen")String gender)
+	{
+		String msg = null;
+		if(gender.equals("MALE"))
+		{
+			if(country.equals("INDIA"))
+			{
+			msg = "WELCOME MR."+name+" ,YOU ARE FROM INDIA";
+			}
+			else
+			{
+			msg = "WELCOME MR."+name+" ,YOU ARE FROM NRI";
+			}
+		}
+		else if(gender.equals("FEMALE"))
+		{
+			if(country.equals("INDIA"))
+		{
+			msg = "WELCOME MISS."+name+" ,YOU ARE FROM FROM INDIA";
+		}
+		else
+		{
+			msg = "WELCOME MISS."+name+" ,YOU ARE FROM NRI";
+		}
+}
+		return msg;
+	}
+}
+
+===========================================================================
+
+
