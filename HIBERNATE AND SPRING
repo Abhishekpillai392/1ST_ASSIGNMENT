@@ -3008,8 +3008,6 @@ PASSWORD <form:input path="passwd" />
 INVALID CREDENTIALS 
 </body>
 </html>
-
-===================================================================================================================================================================
 18  Create bean class Student and access the functionality in the Student class without using any XML configuration file. Use Java code to define configuration.
 
 =>
@@ -3071,4 +3069,1744 @@ public class test_main {
 	}
 
 }
+--------------------------------------------------------------------------------------------------------------
+19. Create an advice which is printing the output on a pointcut method showMessage as following : 
+     1234567891011        ( should come from advice1 )
+     Welcome from method  ( Message from Bean Class method )
+     ************         ( should come from advice2 )
 
+=>
+
+//Employee.java
+
+package P1;
+
+import org.aspectj.lang.annotation.After;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.stereotype.Component;
+
+@Component
+@Aspect
+@EnableAspectJAutoProxy
+public class Employee {
+
+	@Before("pointcut()")
+	public void advice1()
+	{
+		System.out.println("ADVICE 1 METHOD CALLED....");
+	}
+	
+	@After("pointcut()")
+	public void advice2()
+	{
+		System.out.println("ADVICE 2 METHOD CALLED...");
+	}
+	
+	@Pointcut("execution(public void showmessage())")
+	public void pointcut()
+	{
+		
+	}
+}
+
+
+//Staff.java
+
+package P1;
+
+import org.springframework.stereotype.Component;
+
+@Component
+public class Staff {
+
+	public void showmessage()
+	{
+		System.out.println("SHOW MESSAGE METHOD");
+	}
+}
+
+//myconfig.java
+
+package P1;
+
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+@ComponentScan("P1")
+public class myconfig {
+
+}
+
+//test.java
+
+package P1;
+
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+public class test {
+
+	public static void main(String[] args) {
+	
+	AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(myconfig.class);
+	
+	Staff st = ac.getBean("staff",Staff.class);
+	
+	st.showmessage();
+	
+	ac.close();
+	}
+
+}
+
+================================================================
+20. Write a configuration class to inject a dependency of one bean class into another bean class using setter injection. BeanA and BeanB are the bean classes.
+    BeanA has a method which accepts a number and returns the cube value of the number. Inject the BeanA into BeanB and BeanB has a method which accepts a number and
+    returns the square value of the number. Print the Square and cube.
+
+
+=>
+
+
+//BeanA
+
+package ASS_20;
+
+public class BeanA {
+
+	public int accnum(int n)
+	{
+		return n*n*n;
+	}
+}
+
+//BeanB.java
+
+package ASS_20;
+
+public class BeanB {
+
+	BeanA ba;
+
+	public void setBa(BeanA ba) {
+		this.ba = ba;
+	}
+
+	public String nam;
+
+	public String getNam() {
+		return nam;
+	}
+
+	public void setNam(String nam) {
+		this.nam = nam;
+	}
+	
+	public int accnum2(int n)
+	{
+		return n*n;
+	}
+	
+	public int showcube(int n)
+	{
+		return ba.accnum(n);
+	}
+	
+}
+
+//config.java
+
+package ASS_20;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class config {
+
+	public BeanA getb1()
+	{
+		return new BeanA();
+	}
+	
+	@Bean
+	public BeanB getb2()
+	{
+		BeanB b = new BeanB();
+	    b.setBa(getb1());
+	    return b;
+	}
+	
+}
+
+
+//test.java
+
+package ASS_20;
+
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+public class test {
+
+	public static void main(String[] args) {
+		
+	AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(config.class);
+	
+	BeanB b = ac.getBean("getb2",BeanB.class);
+	
+    System.out.println("SQAURE OF A VALUE : "+b.accnum2(4));
+    
+    System.out.println("CUBE OF VALUE : "+b.showcube(4));
+	}
+
+}
+
+-------------------------------------------------------------------------------------------------------
+21. Create a simple hibernate project without Maven to define a POJO class Users (without using annotation). Take userid,username,city from user and print all details on the
+    Console.
+
+=>
+
+//users.java
+
+package ASS_21;
+
+public class users {
+	
+	public int userid;
+	
+	public String usernm;
+	
+	public String city;
+
+	public int getUserid() {
+		return userid;
+	}
+
+	public void setUserid(int userid) {
+		this.userid = userid;
+	}
+
+	public String getUsernm() {
+		return usernm;
+	}
+
+	public void setUsernm(String usernm) {
+		this.usernm = usernm;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	
+}
+//USERS.HBM.XML
+
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 4 Mar, 2021 4:05:03 PM by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="ASS_21.users" table="USERS789">
+        <id name="userid" type="int">
+            <column name="USERID" />
+            <generator class="assigned" />
+        </id>
+        <property name="usernm" type="java.lang.String">
+            <column name="USERNM" />
+        </property>
+        <property name="city" type="java.lang.String">
+            <column name="CITY" />
+        </property>
+    </class>
+</hibernate-mapping>
+
+//HIBERNATE.CFG.XML
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+		"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="hbm2ddl.auto">create</property>
+        <property name="hibernate.connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
+        <property name="hibernate.connection.password">root</property>
+        <property name="hibernate.connection.url">jdbc:oracle:thin:@localhost:1521:xe</property>
+        <property name="hibernate.connection.username">system</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.OracleDialect</property>
+        <property name="show_sql">true</property>
+        <mapping resource="users.hbm.xml"></mapping>
+    </session-factory>
+</hibernate-configuration>
+
+
+//TEST.java
+
+package ASS_21;
+
+import java.util.Scanner;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
+public class test {
+
+	public static void main(String[] args) {
+	Scanner sc = new Scanner(System.in);
+	
+    SessionFactory sf = new Configuration().configure().buildSessionFactory();
+    
+    Session s = sf.openSession();
+    
+    s.beginTransaction();
+    
+    users us = new users();
+    
+	System.out.println("ENTER USER ID : ");
+	int id = sc.nextInt();
+	
+	sc.nextLine();
+	
+	System.out.println("ENTER USER NAME : ");
+	String nm = sc.nextLine();
+	
+	System.out.println("ENTER USER CITY : ");
+	String cy = sc.nextLine();
+	
+	us.setUsernm(nm);
+	us.setUserid(id);
+	us.setCity(cy);
+	
+	s.save(us);
+	
+	System.out.println("INSERTED SUCCESSFULLY....");
+
+	s.getTransaction().commit();
+	
+	s.close();
+	
+	s = sf.openSession();
+	
+	s.beginTransaction();
+	
+	users dis = s.get(users.class,id);
+	
+	System.out.println("USER ID : "+dis.getUserid());
+	System.out.println("USER NAME : "+dis.getUsernm());
+	System.out.println("USER CITY : "+dis.getCity());
+
+	System.out.println("DISPLAYED SUCCESSFULLY ");
+	
+	s.getTransaction();
+	
+	s.close();
+	
+	sf.close();
+	
+	sc.close();
+	}
+
+}
+-------------------------------------------------------------------------------------------------------
+22. Create a simple hibernate project with Maven to define a POJO class Users (without using annotation). Take userid,username,city from user and print all details on the
+    Console.
+
+=>
+
+//pom.xml
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>DEMO</groupId>
+  <artifactId>MAVEN_ASS</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <dependencies>
+  
+  <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
+<dependency>
+    <groupId>org.hibernate</groupId>
+    <artifactId>hibernate-core</artifactId>
+    <version>5.4.28.Final</version>
+</dependency>
+  
+  <!-- https://mvnrepository.com/artifact/com.oracle.database.jdbc/ojdbc8 -->
+<dependency>
+    <groupId>com.oracle.database.jdbc</groupId>
+    <artifactId>ojdbc8</artifactId>
+    <version>21.1.0.0</version>
+</dependency>
+  
+  </dependencies>
+</project>
+
+//users.java
+
+package ASS_21;
+
+public class users {
+	
+	public int userid;
+	
+	public String usernm;
+	
+	public String city;
+
+	public int getUserid() {
+		return userid;
+	}
+
+	public void setUserid(int userid) {
+		this.userid = userid;
+	}
+
+	public String getUsernm() {
+		return usernm;
+	}
+
+	public void setUsernm(String usernm) {
+		this.usernm = usernm;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	
+}
+
+//users.hbm.xml
+
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 4 Mar, 2021 4:05:03 PM by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="ASS_21.users" table="USERS789">
+        <id name="userid" type="int">
+            <column name="USERID" />
+            <generator class="assigned" />
+        </id>
+        <property name="usernm" type="java.lang.String">
+            <column name="USERNM" />
+        </property>
+        <property name="city" type="java.lang.String">
+            <column name="CITY" />
+        </property>
+    </class>
+</hibernate-mapping>
+
+
+//hibernate.cfg.xml
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+		"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="hbm2ddl.auto">create</property>
+        <property name="hibernate.connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
+        <property name="hibernate.connection.password">root</property>
+        <property name="hibernate.connection.url">jdbc:oracle:thin:@localhost:1521:xe</property>
+        <property name="hibernate.connection.username">system</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.OracleDialect</property>
+        <property name="show_sql">true</property>
+        <mapping resource="users.hbm.xml"></mapping>
+    </session-factory>
+</hibernate-configuration>
+
+//test.java
+
+package ASS_21;
+
+import java.util.Scanner;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
+public class test {
+
+	public static void main(String[] args) {
+	Scanner sc = new Scanner(System.in);
+	
+    SessionFactory sf = new Configuration().configure().buildSessionFactory();
+    
+    Session s = sf.openSession();
+    
+    s.beginTransaction();
+    
+    users us = new users();
+    
+	System.out.println("ENTER USER ID : ");
+	int id = sc.nextInt();
+	
+	sc.nextLine();
+	
+	System.out.println("ENTER USER NAME : ");
+	String nm = sc.nextLine();
+	
+	System.out.println("ENTER USER CITY : ");
+	String cy = sc.nextLine();
+	
+	us.setUsernm(nm);
+	us.setUserid(id);
+	us.setCity(cy);
+	
+	s.save(us);
+	
+	System.out.println("INSERTED SUCCESSFULLY....");
+
+	s.getTransaction().commit();
+	
+	s.close();
+	
+	s = sf.openSession();
+	
+	s.beginTransaction();
+	
+	users dis = s.get(users.class,id);
+	
+	System.out.println("USER ID : "+dis.getUserid());
+	System.out.println("USER NAME : "+dis.getUsernm());
+	System.out.println("USER CITY : "+dis.getCity());
+
+	System.out.println("DISPLAYED SUCCESSFULLY ");
+	
+	s.getTransaction();
+	
+	s.close();
+	
+	sf.close();
+	
+	sc.close();
+	}
+
+}
+
+-------------------------------------------------------------------------
+23. Create a simple hibernate project without Maven to define a POJO class Users (using annotation). Take userid,username,city from user and print all details on the
+    Console.
+
+=>
+
+//users2.java
+
+package ASS_23;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "user456")
+public class users2 {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	public int sno;
+	
+	public int getSno() {
+		return sno;
+	}
+
+	public void setSno(int sno) {
+		this.sno = sno;
+	}
+
+	public int userid;
+	
+	public String usernm;
+	
+	public String city;
+
+	public int getUserid() {
+		return userid;
+	}
+
+	public void setUserid(int userid) {
+		this.userid = userid;
+	}
+
+	public String getUsernm() {
+		return usernm;
+	}
+
+	public void setUsernm(String usernm) {
+		this.usernm = usernm;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+}
+
+//hibernate.cfg.xml
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+		"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="hbm2ddl.auto">create</property>
+        <property name="hibernate.connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
+        <property name="hibernate.connection.password">root</property>
+        <property name="hibernate.connection.url">jdbc:oracle:thin:@localhost:1521:xe</property>
+        <property name="hibernate.connection.username">system</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.OracleDialect</property>
+        <property name="show_sql">true</property>
+        <mapping resource="users.hbm.xml"></mapping>
+    </session-factory>
+</hibernate-configuration>
+
+//test.java
+
+package ASS_23;
+
+import java.util.Scanner;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
+public class test2 {
+
+	public static void main(String[] args) {
+
+    Scanner sc = new Scanner(System.in);
+	
+    SessionFactory sf = new Configuration().configure().addAnnotatedClass(users2.class).buildSessionFactory();
+    
+    Session s = sf.openSession();
+    
+    s.beginTransaction();
+    
+    users2 us = new users2();
+    
+	System.out.println("ENTER USER ID : ");
+	int id = sc.nextInt();
+	
+	sc.nextLine();
+	
+	System.out.println("ENTER USER NAME : ");
+	String nm = sc.nextLine();
+	
+	System.out.println("ENTER USER CITY : ");
+	String cy = sc.nextLine();
+	
+	us.setUsernm(nm);
+	us.setUserid(id);
+	us.setCity(cy);
+	
+	s.save(us);
+	
+	System.out.println("INSERTED SUCCESSFULLY....");
+
+	s.getTransaction().commit();
+	
+	s.close();
+	
+	s = sf.openSession();
+	
+	s.beginTransaction();
+	
+	System.out.println("ENTER SNO : ");
+	int sno = sc.nextInt();
+	
+	users2 dis = s.get(users2.class,sno);
+	
+	System.out.println("USER ID : "+dis.getUserid());
+	System.out.println("USER NAME : "+dis.getUsernm());
+	System.out.println("USER CITY : "+dis.getCity());
+
+	System.out.println("DISPLAYED SUCCESSFULLY ");
+	
+	s.getTransaction();
+	
+	s.close();
+	
+	sf.close();
+	
+	sc.close();
+	}
+}
+-----------------------------------------------------------------------------------------------------
+24. Create a simple hibernate project with Maven to define a POJO class Users (using annotation). Take userid,username,city from user and print all details on the
+    Console.
+
+=>
+
+//pom.xml
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>DEMO</groupId>
+  <artifactId>MAVEN_ASS</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <dependencies>
+  <!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-context</artifactId>
+    <version>5.3.4</version>
+</dependency>
+  <!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-core</artifactId>
+    <version>5.3.4</version>
+</dependency>
+ 
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-beans</artifactId>
+    <version>5.3.4</version>
+</dependency>
+  
+  <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
+<dependency>
+    <groupId>org.hibernate</groupId>
+    <artifactId>hibernate-core</artifactId>
+    <version>5.4.28.Final</version>
+</dependency>
+  
+  <!-- https://mvnrepository.com/artifact/com.oracle.database.jdbc/ojdbc8 -->
+<dependency>
+    <groupId>com.oracle.database.jdbc</groupId>
+    <artifactId>ojdbc8</artifactId>
+    <version>21.1.0.0</version>
+</dependency>
+  
+  </dependencies>
+</project>
+
+//users3.java
+
+package ASS_24;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "user567")
+public class users3 {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	public int sno;
+	
+	public int getSno() {
+		return sno;
+	}
+
+	public void setSno(int sno) {
+		this.sno = sno;
+	}
+
+	public int userid;
+	
+	public String usernm;
+	
+	public String city;
+
+	public int getUserid() {
+		return userid;
+	}
+
+	public void setUserid(int userid) {
+		this.userid = userid;
+	}
+
+	public String getUsernm() {
+		return usernm;
+	}
+
+	public void setUsernm(String usernm) {
+		this.usernm = usernm;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+}
+
+//test3.java
+
+package ASS_24;
+
+import java.util.Scanner;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+public class test3 {
+
+	public static void main(String[] args) {
+
+	    Scanner sc = new Scanner(System.in);
+		
+	    SessionFactory sf = new Configuration().configure().addAnnotatedClass(users3.class).buildSessionFactory();
+	    
+	    Session s = sf.openSession();
+	    
+	    s.beginTransaction();
+	    
+	    users3 us = new users3();
+	    
+		System.out.println("ENTER USER ID : ");
+		int id = sc.nextInt();
+		
+		sc.nextLine();
+		
+		System.out.println("ENTER USER NAME : ");
+		String nm = sc.nextLine();
+		
+		System.out.println("ENTER USER CITY : ");
+		String cy = sc.nextLine();
+		
+		us.setUsernm(nm);
+		us.setUserid(id);
+		us.setCity(cy);
+		
+		s.save(us);
+		
+		System.out.println("INSERTED SUCCESSFULLY....");
+
+		s.getTransaction().commit();
+		
+		s.close();
+		
+		s = sf.openSession();
+		
+		s.beginTransaction();
+		
+		System.out.println("ENTER SNO : ");
+		int sno = sc.nextInt();
+		
+		users3 dis = s.get(users3.class,sno);
+		
+		System.out.println("USER ID : "+dis.getUserid());
+		System.out.println("USER NAME : "+dis.getUsernm());
+		System.out.println("USER CITY : "+dis.getCity());
+
+		System.out.println("DISPLAYED SUCCESSFULLY ");
+		
+		s.getTransaction();
+		
+		s.close();
+		
+		sf.close();
+		
+		sc.close();
+		}
+}
+-------------------------------------------------------------------------
+
+25. Create a dynamic hibernate project without Maven to define a POJO class Users (without annotation). Take userid,username,city from user and print all details on the
+    Console.
+
+=>
+//users3.java
+
+package ASS_24;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "user567")
+public class users3 {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	public int sno;
+	
+	public int getSno() {
+		return sno;
+	}
+
+	public void setSno(int sno) {
+		this.sno = sno;
+	}
+
+	public int userid;
+	
+	public String usernm;
+	
+	public String city;
+
+	public int getUserid() {
+		return userid;
+	}
+
+	public void setUserid(int userid) {
+		this.userid = userid;
+	}
+
+	public String getUsernm() {
+		return usernm;
+	}
+
+	public void setUsernm(String usernm) {
+		this.usernm = usernm;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+}
+
+//test3.java
+
+package ASS_24;
+
+import java.util.Scanner;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+public class test3 {
+
+	public static void main(String[] args) {
+
+	    Scanner sc = new Scanner(System.in);
+		
+	    SessionFactory sf = new Configuration().configure().addAnnotatedClass(users3.class).buildSessionFactory();
+	    
+	    Session s = sf.openSession();
+	    
+	    s.beginTransaction();
+	    
+	    users3 us = new users3();
+	    
+		System.out.println("ENTER USER ID : ");
+		int id = sc.nextInt();
+		
+		sc.nextLine();
+		
+		System.out.println("ENTER USER NAME : ");
+		String nm = sc.nextLine();
+		
+		System.out.println("ENTER USER CITY : ");
+		String cy = sc.nextLine();
+		
+		us.setUsernm(nm);
+		us.setUserid(id);
+		us.setCity(cy);
+		
+		s.save(us);
+		
+		System.out.println("INSERTED SUCCESSFULLY....");
+
+		s.getTransaction().commit();
+		
+		s.close();
+		
+		s = sf.openSession();
+		
+		s.beginTransaction();
+		
+		System.out.println("ENTER SNO : ");
+		int sno = sc.nextInt();
+		
+		users3 dis = s.get(users3.class,sno);
+		
+		System.out.println("USER ID : "+dis.getUserid());
+		System.out.println("USER NAME : "+dis.getUsernm());
+		System.out.println("USER CITY : "+dis.getCity());
+
+		System.out.println("DISPLAYED SUCCESSFULLY ");
+		
+		s.getTransaction();
+		
+		s.close();
+		
+		sf.close();
+		
+		sc.close();
+		}
+
+
+26. Create a dynamic hibernate project with Maven to define a POJO class Users (without annotation). Take userid,username,city from user and print all details on the
+    Web Page.
+
+=>
+
+//users3.java
+
+package ASS_24;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "user567")
+public class users3 {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	public int sno;
+	
+	public int getSno() {
+		return sno;
+	}
+
+	public void setSno(int sno) {
+		this.sno = sno;
+	}
+
+	public int userid;
+	
+	public String usernm;
+	
+	public String city;
+
+	public int getUserid() {
+		return userid;
+	}
+
+	public void setUserid(int userid) {
+		this.userid = userid;
+	}
+
+	public String getUsernm() {
+		return usernm;
+	}
+
+	public void setUsernm(String usernm) {
+		this.usernm = usernm;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+}
+
+//test3.java
+
+package ASS_24;
+
+import java.util.Scanner;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+public class test3 {
+
+	public static void main(String[] args) {
+
+	    Scanner sc = new Scanner(System.in);
+		
+	    SessionFactory sf = new Configuration().configure().addAnnotatedClass(users3.class).buildSessionFactory();
+	    
+	    Session s = sf.openSession();
+	    
+	    s.beginTransaction();
+	    
+	    users3 us = new users3();
+	    
+		System.out.println("ENTER USER ID : ");
+		int id = sc.nextInt();
+		
+		sc.nextLine();
+		
+		System.out.println("ENTER USER NAME : ");
+		String nm = sc.nextLine();
+		
+		System.out.println("ENTER USER CITY : ");
+		String cy = sc.nextLine();
+		
+		us.setUsernm(nm);
+		us.setUserid(id);
+		us.setCity(cy);
+		
+		s.save(us);
+		
+		System.out.println("INSERTED SUCCESSFULLY....");
+
+		s.getTransaction().commit();
+		
+		s.close();
+		
+		s = sf.openSession();
+		
+		s.beginTransaction();
+		
+		System.out.println("ENTER SNO : ");
+		int sno = sc.nextInt();
+		
+		users3 dis = s.get(users3.class,sno);
+		
+		System.out.println("USER ID : "+dis.getUserid());
+		System.out.println("USER NAME : "+dis.getUsernm());
+		System.out.println("USER CITY : "+dis.getCity());
+
+		System.out.println("DISPLAYED SUCCESSFULLY ");
+		
+		s.getTransaction();
+		
+		s.close();
+		
+		sf.close();
+		
+		sc.close();
+		}
+
+27. Create a dynamic hibernate project with Maven to define a POJO class Users (with annotation). Take userid,username,city from user and print all details on the
+    Web Page.
+
+=>
+
+//users3.java
+
+package ASS_24;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "user567")
+public class users3 {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	public int sno;
+	
+	public int getSno() {
+		return sno;
+	}
+
+	public void setSno(int sno) {
+		this.sno = sno;
+	}
+
+	public int userid;
+	
+	public String usernm;
+	
+	public String city;
+
+	public int getUserid() {
+		return userid;
+	}
+
+	public void setUserid(int userid) {
+		this.userid = userid;
+	}
+
+	public String getUsernm() {
+		return usernm;
+	}
+
+	public void setUsernm(String usernm) {
+		this.usernm = usernm;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+}
+
+//test3.java
+
+package ASS_24;
+
+import java.util.Scanner;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+public class test3 {
+
+	public static void main(String[] args) {
+
+	    Scanner sc = new Scanner(System.in);
+		
+	    SessionFactory sf = new Configuration().configure().addAnnotatedClass(users3.class).buildSessionFactory();
+	    
+	    Session s = sf.openSession();
+	    
+	    s.beginTransaction();
+	    
+	    users3 us = new users3();
+	    
+		System.out.println("ENTER USER ID : ");
+		int id = sc.nextInt();
+		
+		sc.nextLine();
+		
+		System.out.println("ENTER USER NAME : ");
+		String nm = sc.nextLine();
+		
+		System.out.println("ENTER USER CITY : ");
+		String cy = sc.nextLine();
+		
+		us.setUsernm(nm);
+		us.setUserid(id);
+		us.setCity(cy);
+		
+		s.save(us);
+		
+		System.out.println("INSERTED SUCCESSFULLY....");
+
+		s.getTransaction().commit();
+		
+		s.close();
+		
+		s = sf.openSession();
+		
+		s.beginTransaction();
+		
+		System.out.println("ENTER SNO : ");
+		int sno = sc.nextInt();
+		
+		users3 dis = s.get(users3.class,sno);
+		
+		System.out.println("USER ID : "+dis.getUserid());
+		System.out.println("USER NAME : "+dis.getUsernm());
+		System.out.println("USER CITY : "+dis.getCity());
+
+		System.out.println("DISPLAYED SUCCESSFULLY ");
+		
+		s.getTransaction();
+		
+		s.close();
+		
+		sf.close();
+		
+		sc.close();
+		}
+
+28. Make a Spring MVC project to enter the age of a student in the web page. After clicking on submit button Year of birth should be displayed on the web page.If the age
+    entered is not a number then it should display the error message on the field.
+
+=> //maincontroller.java
+
+package Pack;
+
+import javax.validation.Valid;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller 
+public class main1 {
+
+	@RequestMapping("/assign28")
+	public String meth(Model m)
+	{
+		student st = new student();
+		m.addAttribute("student",st);
+		return "form";
+	}
+	
+	@RequestMapping("/process1")
+	public String meth2(@Valid @ModelAttribute("student") student st,Model m,BindingResult bs)
+	{
+		if(bs.hasErrors())
+		{
+			return "form";
+		}
+		else
+		{
+			m.addAttribute("a",st.getAge());
+			
+			return "display";
+		}
+	}
+}
+
+//student.java
+
+package Pack;
+
+import javax.validation.constraints.NotNull;
+
+public class student {
+
+	@NotNull(message="CANNOT BE 0")
+	public Integer age;
+
+	public student()
+	{
+		
+	}
+	public student(Integer age) {
+		super();
+		this.age = age;
+	}
+
+	public Integer getAge() {
+		return age;
+	}
+
+	public void setAge(Integer age) {
+		this.age = age;
+	}
+	
+	
+}
+
+//form.jsp
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+    <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+errors
+{
+    color: red;
+}
+</style>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<form:form action="process1" method="get" modelAttribute="student">
+AGE <form:input type="number" path="age" />
+<form:errors path="age" cssClass="errors"></form:errors>
+<input type="submit" value="ENTER">
+</form:form>
+</body>
+</html>
+
+//display.jsp
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<%
+int age = (Integer)request.getAttribute("a");
+
+int year = 2021 - age;
+%>
+
+<%="YOUR BIRTH YEAR IS : "+year %>
+</body>
+</html>
+
+//messages.properties
+
+typeMismatch.student.age=Invalid Number
+
+=================================================
+29. Make a spring MVC project to take firstname, lastname and create a dropdown list of Countries. If selected country by the user is India then display a page showing 
+    fullname of user with a message "Welcome to India". If selected country by the user is USA then display a page showing fullname of user with a message "Welcome to 
+    USA".Firstname & Lastname field should not be empty. 
+
+=>
+
+//form.jsp
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+    <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<table border="2">
+<form:form action="process" modelAttribute="tourist">
+<tr><td>FIRSTNAME</td><td><form:input type="text" path="fnm" /></td></tr>
+<tr><td>LASTNAME</td><td><form:input type="text" path="lnm" /></td></tr>
+<tr><td>GENDER</td><td>MALE<form:radiobutton path="gender" value="MALE" />FEMALE<form:radiobutton path="gender" value="FEMALE" /></td></tr>
+<tr><td>COUNTRY</td><td>
+<form:select path="country">
+<form:option value="INDIA">INDIA</form:option>
+<form:option value="AUSTRALIA">AUSTRALIA</form:option>
+<form:option value="USA">USA</form:option>
+</form:select></td></tr>
+<tr><td><input type="submit" value="SUBMIT"></td><td><input type="reset" value="clear"></td></tr>
+</form:form>
+</table>
+</body>
+</html>
+
+//maincontroller.java
+package Pack;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+@Controller
+public class main2 {
+
+	@RequestMapping("/assign29")
+	public String meth(Model m)
+	{
+		tourist t = new tourist();
+		m.addAttribute("tourist",t);
+		return "form2";
+	}
+	
+	@RequestMapping("/process")
+	public String get(@ModelAttribute("tourist") tourist tr,Model m)
+	{
+	   	m.addAttribute("tr",tr);
+	   	
+	   	return "display2";
+	}
+}
+
+//tourist.java
+
+package Pack;
+
+import javax.validation.constraints.NotNull;
+
+public class tourist {
+
+	@NotNull(message="is required")
+	public String fnm;
+	
+	@NotNull(message="is required")
+	public String lnm;
+	
+	public String country;
+	
+	public String gender;
+
+	public tourist(String fnm, String lnm, String country, String gender) {
+		super();
+		this.fnm = fnm;
+		this.lnm = lnm;
+		this.country = country;
+		this.gender = gender;
+	}
+
+	public String getFnm() {
+		return fnm;
+	}
+
+	public void setFnm(String fnm) {
+		this.fnm = fnm;
+	}
+
+	public String getLnm() {
+		return lnm;
+	}
+
+	public void setLnm(String lnm) {
+		this.lnm = lnm;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+	
+	public tourist()
+	{
+		
+	}
+}
+
+//display2.jsp
+
+<%@page import="Pack.tourist"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<%
+
+tourist tr =(tourist)request.getAttribute("tr");
+
+    String fnm = tr.getFnm();
+	String lnm = tr.getLnm();
+	String gender = tr.getGender();
+	String country = tr.getCountry();
+
+
+String msg = null;
+if(gender.equals("MALE"))
+{
+	if(country.equals("INDIA"))
+	{
+	msg = "WELCOME MR."+fnm+" "+lnm+" ,YOU ARE FROM INDIA";
+	}
+	else
+	{
+	msg = "WELCOME MR."+fnm+" "+lnm+" ,YOU ARE FROM NRI";
+	}
+}
+else if(gender.equals("FEMALE"))
+{
+	if(country.equals("INDIA"))
+{
+	msg = "WELCOME MISS."+fnm+" "+lnm+" ,YOU ARE FROM FROM INDIA";
+}
+else
+{
+	msg = "WELCOME MISS."+fnm+" "+lnm+" ,YOU ARE FROM NRI";
+}
+}
+
+
+%>
+</body>
+</html>
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+30. Create a JDBC project in spring to insert employee record like eid,ename,salary,city in the database table. Save 5 employee records and Display all records from the 
+    table.
+
+=>
+
+//employee.java
+
+package ASS_30;
+
+public class employee {
+
+	public int eid;
+	
+	public String name;
+	
+	public int salary;
+	
+	public String city;
+
+	public int getEid() {
+		return eid;
+	}
+
+	public void setEid(int eid) {
+		this.eid = eid;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getSalary() {
+		return salary;
+	}
+
+	public void setSalary(int salary) {
+		this.salary = salary;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+	
+	
+}
+
+//empDAO.JAVA
+
+package ASS_30;
+
+import java.util.List;
+
+import org.springframework.jdbc.core.JdbcTemplate;
+
+public class empDAO {
+
+	public JdbcTemplate jt;
+
+	public void setJt(JdbcTemplate jt) {
+		this.jt = jt;
+	}
+	
+	public int insertion(employee e)
+	{
+		String q = "insert into emp234 values(?,?,?,?)";
+		System.out.println("INSERTED RECORDS INTO THE TABLES");
+		return jt.update(q,e.getEid(),e.getName(),e.getSalary(),e.getCity());
+	}
+	
+	public List<employee> getdetails()
+	{
+		String q = "select * from emp234";
+		List<employee> ls = jt.query(q,new EmployeeMapper());
+		return ls;
+	}
+}
+
+
+//appcontext_30.xml
+
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
+    
+    <bean id="ds" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+    <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property>
+    <property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"></property>
+    <property name="username" value="system"></property>
+    <property name="password" value="root"></property>
+    </bean>
+    
+    <bean id="JdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+    <property name="dataSource" ref="ds"></property>
+    </bean>
+    
+    <bean id="em" class="ASS_30.empDAO">
+    <property name="jt" ref="JdbcTemplate"></property>
+    </bean>
+    
+</beans>
+
+//EmployMappr.java
+
+package ASS_30;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import org.springframework.jdbc.core.RowMapper;
+
+public class EmployeeMapper implements RowMapper<employee>{
+
+	public employee mapRow(ResultSet rs, int rowNum) throws SQLException {
+	
+		employee e = new employee();
+		e.setEid(rs.getInt("eid"));
+		e.setName(rs.getString("name"));
+        e.setSalary(rs.getInt("salary"));
+		e.setCity(rs.getString("city"));
+		return e;
+	}
+
+}
+
+//test.java
+
+package ASS_30;
+
+import java.util.List;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+public class test {
+
+	public static void main(String[] args) {
+
+	ApplicationContext ac = new ClassPathXmlApplicationContext("appcontext_30.xml");
+	
+	empDAO em = ac.getBean("em",empDAO.class);
+	
+	employee e = new employee();
+	
+    e.setEid(784);
+    e.setName("HIMAYUN");
+    e.setSalary(83000);
+    e.setCity("AGRA");
+    
+    int status = em.insertion(e);
+    System.out.println(status);
+    
+    List<employee> l = em.getdetails();
+    
+    for(employee en : l)
+    {
+    	System.out.println(en.getEid()+" "+en.getName()+" "+en.getSalary()+" "+en.getCity());
+    }
+	}
+
+}
